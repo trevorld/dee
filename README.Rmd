@@ -1,0 +1,74 @@
+# dee
+
+[![CRAN Status Badge](https://www.r-pkg.org/badges/version/dee)](https://cran.r-project.org/package=dee)
+[![R-CMD-check](https://github.com/trevorld/dee/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main)](https://github.com/trevorld/dee/actions)
+[![Coverage Status](https://codecov.io/gh/trevorld/dee/branch/main/graph/badge.svg)](https://app.codecov.io/gh/trevorld/dee)
+
+### Table of Contents
+
+* [Overview](#overview)
+* [Installation](#installation)
+* [Examples](#examples)
+* [Related links](#related)
+
+## <a name="overview">Overview</a>
+
+The `{dee}` package provides helper functions to construct a string of the [`d` attribute of svg paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d).  Such svg path strings can be used with `omsvg::svg_path()` or in a bespoke svg creation function.
+
+In particular [FontForge](https://fontforge.org/docs/index.html) cannot import svg glyphs created by `svglite::svglite()` very well and `omsvg::svg_path()` provides no help in constructing an svg path `d` attribute:
+
+> A path can potentially be quite complex (with an interplay of line and curve commands), so, a hand-encoded `path` string is not often done by hand. For this reason, the `path` argument accepts only a formatted string that complies with the input requirements for the d attribute of the SVG `<path>` tag.
+
+## <a name="installation">Installation</a>
+
+```r
+remotes::install_github("trevorld/dee")
+```
+
+## <a name="examples">Examples</a>
+
+```{r heart, eval=requireNamespace("omsvg"), results="asis"}
+library("dee", warn.conflicts = FALSE) # masks `stats::C()`
+library("omsvg")
+# https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d#example
+d <- M(10, 30) +
+     A(20, 20, 0, 0, 1, 50, 30) +
+     A(20, 20, 0, 0, 1, 90, 30) +
+     Q(90, 60, 50, 90) +
+     Q(10, 60, 10, 30) +
+     Z()
+
+SVG(width = 100, height = 100, viewbox = TRUE) |>
+    svg_path(d, fill="red", stroke="black", stroke_width=2)
+```
+
+```{r holed, eval=requireNamespace("omsvg"), results="asis"}
+library("affiner")
+library("dee")
+library("omsvg")
+po <- as_coord2d(x = c(10, 10, 90, 90),
+                 y = c(10, 90, 90, 10))
+pi <- po$clone()$
+    translate(-mean(po))$
+    scale(0.5)$
+    rotate(45)$
+    translate(mean(po))
+
+d <- MZ(po) + MZ(pi)
+attrs <- svg_attrs_pres(fill_rule = "evenodd")
+SVG(width = 100, height = 100, viewbox = TRUE) |>
+    svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs)
+```
+
+## <a name="related">Related links</a>
+
+The `d` attribute of svg paths:
+
+* [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d)
+* [w3.org SVG 1.1 specification](https://www.w3.org/TR/2011/REC-SVG11-20110816/paths.html#PathData)
+
+R packages:
+
+* [omsvg](https://github.com/rich-iannone/omsvg)
+* [svglite](https://github.com/r-lib/svglite)
+* [svgparser](https://github.com/coolbutuseless/svgparser)

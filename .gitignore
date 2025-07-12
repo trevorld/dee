@@ -1,0 +1,7 @@
+README.html
+codecov.yml
+pkgdown
+*.swp
+tmp
+raw-data/step_1
+raw-data/step_2

@@ -1,0 +1,52 @@
+test_that("`M()`", {
+    expect_equal(MZ(1:2, 1:2) |> format(),
+                 "M 1,1 2,2 Z")
+    expect_equal(mz(1:2, 1:2) |> format(),
+                 "m 1,1 2,2 z")
+})
+
+test_that("`L()`", {
+    expect_equal(LZ(1:2, 1:2) |> format(),
+                 "L 1,1 2,2 Z")
+    expect_equal(lz(1:2, 1:2) |> format(),
+                 "l 1,1 2,2 z")
+
+    expect_equal(HZ(1:2) |> format(),
+                 "H 1 2 Z")
+    expect_equal(hz(1:2) |> format(),
+                 "h 1 2 z")
+
+    expect_equal(VZ(1:2) |> format(),
+                 "V 1 2 Z")
+    expect_equal(vz(1:2) |> format(),
+                 "v 1 2 z")
+})
+
+test_that("`Q()`", {
+    expect_equal(QZ(1:2, 1:2, 1:2, 1:2) |> format(),
+                 "Q 1,1 1,1 2,2 2,2 Z")
+    expect_equal(qz(1:2, 1:2, 1:2, 1:2) |> format(),
+                 "q 1,1 1,1 2,2 2,2 z")
+    expect_equal(TZ(1:2, 1:2) |> format(),
+                 "T 1,1 2,2 Z")
+    expect_equal(tz(1:2, 1:2) |> format(),
+                 "t 1,1 2,2 z")
+})
+
+test_that("`C()`", {
+    expect_equal(CZ(1:2, 1:2, 1:2, 1:2, 1:2, 1:2) |> format(),
+                 "C 1,1 1,1 1,1 2,2 2,2 2,2 Z")
+    expect_equal(cz(1:2, 1:2, 1:2, 1:2, 1:2, 1:2) |> format(),
+                 "c 1,1 1,1 1,1 2,2 2,2 2,2 z")
+    expect_equal(SZ(1:2, 1:2, 1:2, 1:2) |> format(),
+                 "S 1,1 1,1 2,2 2,2 Z")
+    expect_equal(sz(1:2, 1:2, 1:2, 1:2) |> format(),
+                 "s 1,1 1,1 2,2 2,2 z")
+})
+
+test_that("`A()`", {
+    expect_equal(AZ(1:2, 1:2, 0, 0, 0, 1:2, 1:2) |> format(),
+                 "A 1,1 0,0,0 1,1 2,2 0,0,0 2,2 Z")
+    expect_equal(az(1:2, 1:2, 0, 0, 0, 1:2, 1:2) |> format(),
+                 "a 1,1 0,0,0 1,1 2,2 0,0,0 2,2 z")
+})
