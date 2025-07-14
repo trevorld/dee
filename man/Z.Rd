@@ -15,3 +15,7 @@ A \code{\link[=dee]{dee()}} object.
 \description{
 \code{Z()} and \code{zz()} connects the initial point of the current subpath with the last point (with a straight line if these are different).  There is no difference between \code{Z()} and \code{zz()}.
 }
+\examples{
+M(1, 1) + L(2, 2) + Z()
+M(1, 1) + ll(2, 2) + zz()
+}

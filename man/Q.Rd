@@ -11,17 +11,49 @@
 \alias{tz}
 \title{The quadratic Bezier curve commands}
 \usage{
-Q(x1, y1 = NULL, x, y = NULL, sep = getOption("dee.sep", ","))
+Q(
+  x1,
+  y1 = NULL,
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
-qq(x1, y1 = NULL, x, y = NULL, sep = getOption("dee.sep", ","))
+qq(
+  x1,
+  y1 = NULL,
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
 QZ(...)
 
 qz(...)
 
-T(x, y = NULL, sep = getOption("dee.sep", ","))
+T(
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
-tt(x, y = NULL, sep = getOption("dee.sep", ","))
+tt(
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
 TZ(...)
 
@@ -38,9 +70,12 @@ Else a numeric vector.}
 
 \item{y}{Either \code{NULL} or a numeric vector.}
 
+\item{...}{Passed to related function.}
+
 \item{sep}{Either \code{","} or \code{" "}.}
 
-\item{...}{Passed to related function.}
+\item{origin_at_bottom, height}{If \code{origin_at_bottom} is \code{TRUE} then
+\code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by \code{height - y}.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.
@@ -48,4 +83,8 @@ A \code{\link[=dee]{dee()}} object.
 \description{
 \code{Q()} and \code{qq()} draw quadratic Bezier curves
 \code{T()} and \code{tt()} draw quadratic Bezier curves assuming the control point is the reflection of the previous Bezier curve command.
+}
+\examples{
+M(1, 1) + Q(2, 2, 3, 3) + T(4, 4) + Z()
+M(1, 1) + qq(1, 1, 2, 2) + tt(1, 1) + zz()
 }

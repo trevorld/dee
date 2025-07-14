@@ -11,13 +11,15 @@
 * [Examples](#examples)
 * [Related links](#related)
 
+```{r setup, results="none", echo=FALSE}
+eval_code <- requireNamespace("omsvg", quietly = TRUE)
+```
+
 ## <a name="overview">Overview</a>
 
 The `{dee}` package provides helper functions to construct a string of the [`d` attribute of svg paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d).  Such svg path strings can be used with `omsvg::svg_path()` or in a bespoke svg creation function.
 
-In particular [FontForge](https://fontforge.org/docs/index.html) cannot import svg glyphs created by `svglite::svglite()` very well and `omsvg::svg_path()` provides no help in constructing an svg path `d` attribute:
-
-> A path can potentially be quite complex (with an interplay of line and curve commands), so, a hand-encoded `path` string is not often done by hand. For this reason, the `path` argument accepts only a formatted string that complies with the input requirements for the d attribute of the SVG `<path>` tag.
+In particular I want to generate some svg images of font glyphs to import into [FontForge](https://fontforge.org/docs/index.html) which doesn't seem to import svg glyphs created by `svglite::svglite()` very well and `omsvg::svg_path()` provides no help in constructing an svg path `d` attribute.
 
 ## <a name="installation">Installation</a>
 
@@ -27,7 +29,7 @@ remotes::install_github("trevorld/dee")
 
 ## <a name="examples">Examples</a>
 
-```{r heart, eval=requireNamespace("omsvg"), results="asis"}
+```{r heart}
 library("dee", warn.conflicts = FALSE) # masks `stats::C()`
 library("omsvg")
 # https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d#example
@@ -38,13 +40,22 @@ d <- M(10, 30) +
      Q(10, 60, 10, 30) +
      Z()
 
-SVG(width = 100, height = 100, viewbox = TRUE) |>
-    svg_path(d, fill="red", stroke="black", stroke_width=2)
+print(d)
 ```
 
-```{r holed, eval=requireNamespace("omsvg"), results="asis"}
+```{r heart_render, eval=eval_code, results="asis"}
+SVG(width = 100, height = 100, viewbox = TRUE) |>
+    svg_path(d, fill="red", stroke="black", stroke_width=2) |>
+    as.character() |> cat()
+```
+
+Instead of explicitly indicating each `x` and `y` coordinate one
+can also use objects that contain both `x` and `y` coordinates
+if they can be coerced by `affiner::as_coord2d()`.
+
+```{r holed}
 library("affiner")
-library("dee")
+library("dee", warn.conflicts = FALSE) # masks `stats::C()`
 library("omsvg")
 po <- as_coord2d(x = c(10, 10, 90, 90),
                  y = c(10, 90, 90, 10))
@@ -52,12 +63,44 @@ pi <- po$clone()$
     translate(-mean(po))$
     scale(0.5)$
     rotate(45)$
-    translate(mean(po))
+    translate(mean(po)) |>
+    round()
 
 d <- MZ(po) + MZ(pi)
+print(d)
+```
+
+```{r holed_render, eval=eval_code, results="asis"}
 attrs <- svg_attrs_pres(fill_rule = "evenodd")
 SVG(width = 100, height = 100, viewbox = TRUE) |>
-    svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs)
+    svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs) |>
+    as.character() |> cat()
+```
+
+One can used the `dee.origin_at_bottom` and `dee.height` options if one
+prefers to think of the origin being at the bottom left corner (as is typical
+with R graphics) instead of the top left corner (as is typical with the svg format).
+
+```{r origin_at_bottom}
+library("affiner")
+library("dee", warn.conflicts = FALSE) # masks `stats::C()`
+library("omsvg")
+p <- as_coord2d(x = c(10, 40, 70),
+                y = c(10, 40, 10))
+t1 <- MZ(p)
+t2 <- rlang::with_options(MZ(p),
+                          dee.origin_at_bottom = TRUE,
+                          dee.height = 100)
+print(t1)
+print(t2)
+```
+
+```{r origin_at_bottom_render, eval=eval_code, results="asis"}
+attrs <- svg_attrs_pres(fill_rule = "evenodd")
+SVG(width = 100, height = 100, viewbox = TRUE) |>
+    svg_path(t1, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs) |>
+    svg_path(t2, fill = "orange", stroke = "black", stroke_width = 2, attrs = attrs) |>
+    as.character() |> cat()
 ```
 
 ## <a name="related">Related links</a>

@@ -15,9 +15,23 @@
 \alias{vz}
 \title{The "lineto" commands}
 \usage{
-L(x, y = NULL, sep = getOption("dee.sep", ","))
+L(
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
-ll(x, y = NULL, sep = getOption("dee.sep", ","))
+ll(
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
 LZ(...)
 
@@ -31,9 +45,19 @@ HZ(...)
 
 hz(...)
 
-V(y)
+V(
+  y,
+  ...,
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
-vv(y)
+vv(
+  y,
+  ...,
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
 VZ(...)
 
@@ -45,9 +69,12 @@ Else a numeric vector.}
 
 \item{y}{Either \code{NULL} or a numeric vector.}
 
+\item{...}{Passed to related function.}
+
 \item{sep}{Either \code{","} or \code{" "}.}
 
-\item{...}{Passed to related function.}
+\item{origin_at_bottom, height}{If \code{origin_at_bottom} is \code{TRUE} then
+\code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by \code{height - y}.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.
@@ -56,4 +83,8 @@ A \code{\link[=dee]{dee()}} object.
 \code{L()} and \code{ll()} draw straight lines,
 \code{H()} and \code{hh()} draw horizontal lines, and
 \code{V()} and \code{vv()} draw vertical lines.
+}
+\examples{
+M(1, 1) + L(2, 2) + Z()
+M(1, 1) + ll(1, 1) + zz()
 }

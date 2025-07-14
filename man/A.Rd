@@ -15,7 +15,10 @@ A(
   sweep_flag = FALSE,
   x,
   y = NULL,
-  sep = getOption("dee.sep", ",")
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
 )
 
 aa(
@@ -26,7 +29,10 @@ aa(
   sweep_flag = FALSE,
   x,
   y = NULL,
-  sep = getOption("dee.sep", ",")
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
 )
 
 AZ(...)
@@ -49,13 +55,20 @@ Else a numeric vector.}
 
 \item{y}{Either \code{NULL} or a numeric vector.}
 
+\item{...}{Passed to related function.}
+
 \item{sep}{Either \code{","} or \code{" "}.}
 
-\item{...}{Passed to related function.}
+\item{origin_at_bottom, height}{If \code{origin_at_bottom} is \code{TRUE} then
+\code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by \code{height - y}.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.
 }
 \description{
 \code{A()} and \code{aa()} draw elliptical arc curve commands.
+}
+\examples{
+M(1, 1) + A(rx = 1, x = 2, y = 2) + Z()
+M(1, 1) + aa(rx = 1, x = 1, y = 1) + zz()
 }
