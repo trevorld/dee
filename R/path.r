@@ -22,7 +22,8 @@ zz <- function() dee("z")
 #' @param y Either `NULL` or a numeric vector.
 #' @param sep Either `","` or `" "`.
 #' @param origin_at_bottom,height If `origin_at_bottom` is `TRUE` then
-#'                                `y` (and any `y1` and `y2`) coordinates is transformed by `height - y`.
+#'                                `y` (and any `y1` and `y2`) coordinates is transformed by
+#'                                `height - y` for absolute coordinates and `-y` for relative coordinates.
 #' @return A [dee()] object.
 #' @examples
 #' M(1, 1) + L(2, 2) + Z()
@@ -53,7 +54,7 @@ mm <- function(x, y = NULL, ...,
     x <- p$x
     y <- p$y
     if (isTRUE(origin_at_bottom)) {
-        y <- height - y
+        y <- -y
     }
     paste(c("m", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -109,7 +110,7 @@ ll <- function(x, y = NULL, ...,
     x <- p$x
     y <- p$y
     if (isTRUE(origin_at_bottom)) {
-        y <- height - y
+        y <- -y
     }
     paste(c("l", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -173,7 +174,7 @@ vv <- function(y, ...,
     check_dots_empty()
     stopifnot(is.numeric(y))
     if (isTRUE(origin_at_bottom)) {
-        y <- height - y
+        y <- -y
     }
     paste(c("v", y), collapse = " ") |> dee()
 }
@@ -239,8 +240,8 @@ qq <- function(x1, y1 = NULL, x, y = NULL, ...,
     x <- p$x
     y <- p$y
     if (isTRUE(origin_at_bottom)) {
-        y1 <- height - y1
-        y <- height - y
+        y1 <- -y1
+        y <- -y
     }
     xy1 <- paste(x1, y1, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -286,7 +287,7 @@ tt <- function(x, y = NULL, ...,
     x <- p$x
     y <- p$y
     if (isTRUE(origin_at_bottom)) {
-        y <- height - y
+        y <- -y
     }
     paste(c("t", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -360,9 +361,9 @@ cc <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL,...,
     x <- p$x
     y <- p$y
     if (isTRUE(origin_at_bottom)) {
-        y2 <- height - y2
-        y1 <- height - y1
-        y <- height - y
+        y2 <- -y2
+        y1 <- -y1
+        y <- -y
     }
     xy1 <- paste(x1, y1, sep = sep)
     xy2 <- paste(x2, y2, sep = sep)
@@ -418,8 +419,8 @@ ss <- function(x2, y2 = NULL, x, y = NULL, ...,
     x <- p$x
     y <- p$y
     if (isTRUE(origin_at_bottom)) {
-        y2 <- height - y2
-        y <- height - y
+        y2 <- -y2
+        y <- -y
     }
     xy2 <- paste(x2, y2, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -499,13 +500,17 @@ aa <- function(rx, ry = rx, x_axis_rotation = 0, large_arc_flag = FALSE, sweep_f
 
     large_arc <- as.integer(as.logical(large_arc_flag))
     sweep <- as.integer(as.logical(sweep_flag))
+    if (isTRUE(origin_at_bottom)) {
+        sweep <- 1L - sweep
+        x_axis_rotation <- -x_axis_rotation
+    }
     rls <- paste(x_axis_rotation, large_arc, sweep, sep = sep)
 
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
     if (isTRUE(origin_at_bottom)) {
-        y <- height - y
+        y <- -y
     }
     xy <- paste(x, y, sep = sep)
     paste(c("a", paste(rxy, rls, xy)), collapse = " ") |> dee()

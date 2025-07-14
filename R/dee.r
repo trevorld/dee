@@ -27,7 +27,7 @@ format.dee <- function(x, ...) {
 #' @export
 print.dee <- function(x, ...) {
     check_dots_empty()
-    x <- format.dee(x, ...)
-    cat(x, "\n", sep = "")
-    invisible(NULL)
+    s <- format.dee(x, ...)
+    cat(s, "\n", sep = "")
+    invisible(x)
 }

@@ -74,7 +74,8 @@ Else a numeric vector.}
 \item{sep}{Either \code{","} or \code{" "}.}
 
 \item{origin_at_bottom, height}{If \code{origin_at_bottom} is \code{TRUE} then
-\code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by \code{height - y}.}
+\code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by
+\code{height - y} for absolute coordinates and \code{-y} for relative coordinates.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.
