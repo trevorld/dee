@@ -36,8 +36,8 @@ M <- function(x, y = NULL, ...,
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("M", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -52,8 +52,8 @@ mm <- function(x, y = NULL, ...,
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("m", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -92,8 +92,8 @@ L <- function(x, y = NULL, ...,
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("L", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -108,8 +108,8 @@ ll <- function(x, y = NULL, ...,
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("l", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -159,8 +159,8 @@ V <- function(y, ...,
               height = getOption("dee.height", NULL)) {
     check_dots_empty()
     stopifnot(is.numeric(y))
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("V", y), collapse = " ") |> dee()
 }
@@ -172,8 +172,8 @@ vv <- function(y, ...,
                height = getOption("dee.height", NULL)) {
     check_dots_empty()
     stopifnot(is.numeric(y))
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("v", y), collapse = " ") |> dee()
 }
@@ -216,9 +216,9 @@ Q <- function(x1, y1 = NULL, x, y = NULL, ...,
     y1 <- p1$y
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y1 <- getOption("dee.height") - y1
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y1 <- height - y1
+        y <- height - y
     }
     xy1 <- paste(x1, y1, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -238,9 +238,9 @@ qq <- function(x1, y1 = NULL, x, y = NULL, ...,
     y1 <- p1$y
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y1 <- getOption("dee.height") - y1
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y1 <- height - y1
+        y <- height - y
     }
     xy1 <- paste(x1, y1, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -269,8 +269,8 @@ T <- function(x, y = NULL, ...,
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("T", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -285,8 +285,8 @@ tt <- function(x, y = NULL, ...,
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     paste(c("t", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
@@ -332,10 +332,10 @@ C <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL, ...,
     y2 <- p2$y
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y2 <- getOption("dee.height") - y2
-        y1 <- getOption("dee.height") - y1
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y2 <- height - y2
+        y1 <- height - y1
+        y <- height - y
     }
     xy1 <- paste(x1, y1, sep = sep)
     xy2 <- paste(x2, y2, sep = sep)
@@ -359,10 +359,10 @@ cc <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL,...,
     y2 <- p2$y
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y2 <- getOption("dee.height") - y2
-        y1 <- getOption("dee.height") - y1
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y2 <- height - y2
+        y1 <- height - y1
+        y <- height - y
     }
     xy1 <- paste(x1, y1, sep = sep)
     xy2 <- paste(x2, y2, sep = sep)
@@ -395,9 +395,9 @@ S <- function(x2, y2 = NULL, x, y = NULL,...,
     y2 <- p2$y
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y2 <- getOption("dee.height") - y2
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y2 <- height - y2
+        y <- height - y
     }
     xy2 <- paste(x2, y2, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -417,9 +417,9 @@ ss <- function(x2, y2 = NULL, x, y = NULL, ...,
     y2 <- p2$y
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y2 <- getOption("dee.height") - y2
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y2 <- height - y2
+        y <- height - y
     }
     xy2 <- paste(x2, y2, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -446,16 +446,21 @@ sz <- function(...) {
 #' @inheritParams M
 #' @param rx,ry Radius of ellipse.
 #' @param x_axis_rotation Angle (in degrees) from x-axis of ellipse.
+#'                        Will be coerced by [affiner::degrees()].
+#'                        If `isTRUE(origin_at_bottom)` will multiply by `-1`.
 #' @param large_arc_flag If `TRUE` then one of two larger arc sweeps chosen else
 #'                       one of the two smaller arc sweeps.
 #' @param sweep_flag If `TRUE` then arc will be drawn in "positive-angle" direction.
 #'                   else drawn in "negative-angle" direction.
+#'                   If `isTRUE(origin_at_bottom)` will invert.
 #' @return A [dee()] object.
 #' @examples
 #' M(1, 1) + A(rx = 1, x = 2, y = 2) + Z()
 #' M(1, 1) + aa(rx = 1, x = 1, y = 1) + zz()
 #' @export
-A <- function(rx, ry = rx, x_axis_rotation = 0, large_arc_flag = FALSE, sweep_flag = FALSE, x, y = NULL, ...,
+A <- function(rx, ry = rx,
+              x_axis_rotation = 0, large_arc_flag = FALSE, sweep_flag = FALSE,
+              x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
               height = getOption("dee.height", NULL)) {
@@ -463,15 +468,20 @@ A <- function(rx, ry = rx, x_axis_rotation = 0, large_arc_flag = FALSE, sweep_fl
     stopifnot(is.numeric(rx), is.numeric(rx))
     rxy <- paste(rx, ry, sep = sep)
 
+    x_axis_rotation <- as.numeric(affiner::degrees(x_axis_rotation))
     large_arc <- as.integer(as.logical(large_arc_flag))
     sweep <- as.integer(as.logical(sweep_flag))
+    if (isTRUE(origin_at_bottom)) {
+        sweep <- 1L - sweep
+        x_axis_rotation <- -x_axis_rotation
+    }
     rls <- paste(x_axis_rotation, large_arc, sweep, sep = sep)
 
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     xy <- paste(x, y, sep = sep)
     paste(c("A", paste(rxy, rls, xy)), collapse = " ") |> dee()
@@ -494,8 +504,8 @@ aa <- function(rx, ry = rx, x_axis_rotation = 0, large_arc_flag = FALSE, sweep_f
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
-    if (isTRUE(getOption("dee.origin_at_bottom"))) {
-        y <- getOption("dee.height") - y
+    if (isTRUE(origin_at_bottom)) {
+        y <- height - y
     }
     xy <- paste(x, y, sep = sep)
     paste(c("a", paste(rxy, rls, xy)), collapse = " ") |> dee()

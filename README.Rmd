@@ -31,7 +31,6 @@ remotes::install_github("trevorld/dee")
 
 ```{r heart}
 library("dee", warn.conflicts = FALSE) # masks `stats::C()`
-library("omsvg")
 # https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d#example
 d <- M(10, 30) +
      A(20, 20, 0, 0, 1, 50, 30) +
@@ -44,9 +43,9 @@ print(d)
 ```
 
 ```{r heart_render, eval=eval_code, results="asis"}
+library("omsvg")
 SVG(width = 100, height = 100, viewbox = TRUE) |>
-    svg_path(d, fill="red", stroke="black", stroke_width=2) |>
-    as.character() |> cat()
+    svg_path(d, fill="red", stroke="black", stroke_width=2)
 ```
 
 Instead of explicitly indicating each `x` and `y` coordinate one
@@ -56,7 +55,6 @@ if they can be coerced by `affiner::as_coord2d()`.
 ```{r holed}
 library("affiner")
 library("dee", warn.conflicts = FALSE) # masks `stats::C()`
-library("omsvg")
 po <- as_coord2d(x = c(10, 10, 90, 90),
                  y = c(10, 90, 90, 10))
 pi <- po$clone()$
@@ -71,10 +69,10 @@ print(d)
 ```
 
 ```{r holed_render, eval=eval_code, results="asis"}
+library("omsvg")
 attrs <- svg_attrs_pres(fill_rule = "evenodd")
 SVG(width = 100, height = 100, viewbox = TRUE) |>
-    svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs) |>
-    as.character() |> cat()
+    svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs)
 ```
 
 One can used the `dee.origin_at_bottom` and `dee.height` options if one
@@ -84,7 +82,6 @@ with R graphics) instead of the top left corner (as is typical with the svg form
 ```{r origin_at_bottom}
 library("affiner")
 library("dee", warn.conflicts = FALSE) # masks `stats::C()`
-library("omsvg")
 p <- as_coord2d(x = c(10, 40, 70),
                 y = c(10, 40, 10))
 t1 <- MZ(p)
@@ -96,11 +93,10 @@ print(t2)
 ```
 
 ```{r origin_at_bottom_render, eval=eval_code, results="asis"}
-attrs <- svg_attrs_pres(fill_rule = "evenodd")
+library("omsvg")
 SVG(width = 100, height = 100, viewbox = TRUE) |>
-    svg_path(t1, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs) |>
-    svg_path(t2, fill = "orange", stroke = "black", stroke_width = 2, attrs = attrs) |>
-    as.character() |> cat()
+    svg_path(t1, fill = "cyan", stroke = "black", stroke_width = 2) |>
+    svg_path(t2, fill = "orange", stroke = "black", stroke_width = 2)
 ```
 
 ## <a name="related">Related links</a>

@@ -42,13 +42,16 @@ az(...)
 \arguments{
 \item{rx, ry}{Radius of ellipse.}
 
-\item{x_axis_rotation}{Angle (in degrees) from x-axis of ellipse.}
+\item{x_axis_rotation}{Angle (in degrees) from x-axis of ellipse.
+Will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}.
+If \code{isTRUE(origin_at_bottom)} will multiply by \code{-1}.}
 
 \item{large_arc_flag}{If \code{TRUE} then one of two larger arc sweeps chosen else
 one of the two smaller arc sweeps.}
 
 \item{sweep_flag}{If \code{TRUE} then arc will be drawn in "positive-angle" direction.
-else drawn in "negative-angle" direction.}
+else drawn in "negative-angle" direction.
+If \code{isTRUE(origin_at_bottom)} will invert.}
 
 \item{x}{If \code{y} is \code{NULL} will be coerced by \code{\link[affiner:as_coord2d]{affiner::as_coord2d()}}.
 Else a numeric vector.}
