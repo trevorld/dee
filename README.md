@@ -11,13 +11,13 @@
 * [Examples](#examples)
 * [Related links](#related)
 
+
+
 ## <a name="overview">Overview</a>
 
 The `{dee}` package provides helper functions to construct a string of the [`d` attribute of svg paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d).  Such svg path strings can be used with `omsvg::svg_path()` or in a bespoke svg creation function.
 
-In particular [FontForge](https://fontforge.org/docs/index.html) cannot import svg glyphs created by `svglite::svglite()` very well and `omsvg::svg_path()` provides no help in constructing an svg path `d` attribute:
-
-> A path can potentially be quite complex (with an interplay of line and curve commands), so, a hand-encoded `path` string is not often done by hand. For this reason, the `path` argument accepts only a formatted string that complies with the input requirements for the d attribute of the SVG `<path>` tag.
+In particular I want to generate some svg images of font glyphs to import into [FontForge](https://fontforge.org/docs/index.html) which doesn't seem to import svg glyphs created by `svglite::svglite()` very well and `omsvg::svg_path()` provides no help in constructing an svg path `d` attribute.
 
 ## <a name="installation">Installation</a>
 
@@ -39,18 +39,32 @@ d <- M(10, 30) +
      Q(10, 60, 10, 30) +
      Z()
 
-SVG(width = 100, height = 100, viewbox = TRUE) |>
-    svg_path(d, fill="red", stroke="black", stroke_width=2)
+print(d)
 ```
 
-<!--html_preserve--><svg width="100" height="100" viewBox="0 0 100 100">
+```
+## M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 Z
+```
+
+
+``` r
+SVG(width = 100, height = 100, viewbox = TRUE) |>
+    svg_path(d, fill="red", stroke="black", stroke_width=2) |>
+    as.character() |> cat()
+```
+
+<svg width="100" height="100" viewBox="0 0 100 100">
   <path d="M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 Z" stroke="black" stroke-width="2" fill="red"/>
-</svg><!--/html_preserve-->
+</svg>
+
+Instead of explicitly indicating each `x` and `y` coordinate one
+can also use objects that contain both `x` and `y` coordinates
+if they can be coerced by `affiner::as_coord2d()`.
 
 
 ``` r
 library("affiner")
-library("dee")
+library("dee", warn.conflicts = FALSE) # masks `stats::C()`
 library("omsvg")
 po <- as_coord2d(x = c(10, 10, 90, 90),
                  y = c(10, 90, 90, 10))
@@ -58,17 +72,73 @@ pi <- po$clone()$
     translate(-mean(po))$
     scale(0.5)$
     rotate(45)$
-    translate(mean(po))
+    translate(mean(po)) |>
+    round()
 
 d <- MZ(po) + MZ(pi)
-attrs <- svg_attrs_pres(fill_rule = "evenodd")
-SVG(width = 100, height = 100, viewbox = TRUE) |>
-    svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs)
+print(d)
 ```
 
-<!--html_preserve--><svg width="100" height="100" viewBox="0 0 100 100">
-  <path d="M 10,10 10,90 90,90 90,10 Z M 50,21.7157287525381 21.7157287525381,50 50,78.2842712474619 78.2842712474619,50 Z" stroke="black" stroke-width="2" fill="cyan" fill-rule="evenodd"/>
-</svg><!--/html_preserve-->
+```
+## M 10,10 10,90 90,90 90,10 Z 
+## M 50,22 22,50 50,78 78,50 Z
+```
+
+
+``` r
+attrs <- svg_attrs_pres(fill_rule = "evenodd")
+SVG(width = 100, height = 100, viewbox = TRUE) |>
+    svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs) |>
+    as.character() |> cat()
+```
+
+<svg width="100" height="100" viewBox="0 0 100 100">
+  <path d="M 10,10 10,90 90,90 90,10 Z M 50,22 22,50 50,78 78,50 Z" stroke="black" stroke-width="2" fill="cyan" fill-rule="evenodd"/>
+</svg>
+
+One can used the `dee.origin_at_bottom` and `dee.height` options if one
+prefers to think of the origin being at the bottom left corner (as is typical
+with R graphics) instead of the top left corner (as is typical with the svg format).
+
+
+``` r
+library("affiner")
+library("dee", warn.conflicts = FALSE) # masks `stats::C()`
+library("omsvg")
+p <- as_coord2d(x = c(10, 40, 70),
+                y = c(10, 40, 10))
+t1 <- MZ(p)
+t2 <- rlang::with_options(MZ(p),
+                          dee.origin_at_bottom = TRUE,
+                          dee.height = 100)
+print(t1)
+```
+
+```
+## M 10,10 40,40 70,10 Z
+```
+
+``` r
+print(t2)
+```
+
+```
+## M 10,90 40,60 70,90 Z
+```
+
+
+``` r
+attrs <- svg_attrs_pres(fill_rule = "evenodd")
+SVG(width = 100, height = 100, viewbox = TRUE) |>
+    svg_path(t1, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs) |>
+    svg_path(t2, fill = "orange", stroke = "black", stroke_width = 2, attrs = attrs) |>
+    as.character() |> cat()
+```
+
+<svg width="100" height="100" viewBox="0 0 100 100">
+  <path d="M 10,10 40,40 70,10 Z" stroke="black" stroke-width="2" fill="cyan" fill-rule="evenodd"/>
+  <path d="M 10,90 40,60 70,90 Z" stroke="black" stroke-width="2" fill="orange" fill-rule="evenodd"/>
+</svg>
 
 ## <a name="related">Related links</a>
 

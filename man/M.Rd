@@ -7,9 +7,23 @@
 \alias{mz}
 \title{The "moveto" commands}
 \usage{
-M(x, y = NULL, sep = getOption("dee.sep", ","))
+M(
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
-mm(x, y = NULL, sep = getOption("dee.sep", ","))
+mm(
+  x,
+  y = NULL,
+  ...,
+  sep = getOption("dee.sep", ","),
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height", NULL)
+)
 
 MZ(...)
 
@@ -21,13 +35,20 @@ Else a numeric vector.}
 
 \item{y}{Either \code{NULL} or a numeric vector.}
 
+\item{...}{Passed to related function.}
+
 \item{sep}{Either \code{","} or \code{" "}.}
 
-\item{...}{Passed to related function.}
+\item{origin_at_bottom, height}{If \code{origin_at_bottom} is \code{TRUE} then
+\code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by \code{height - y}.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.
 }
 \description{
 \code{M()} and \code{mm()} move the "pen" to a new point.
+}
+\examples{
+M(1, 1) + L(2, 2) + Z()
+M(1, 1) + ll(1, 1) + zz()
 }
