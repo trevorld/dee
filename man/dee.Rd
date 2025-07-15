@@ -7,7 +7,7 @@
 dee(x)
 }
 \arguments{
-\item{x}{A character vector of length 1.}
+\item{x}{A character vector.}
 }
 \value{
 An object of class "dee".
