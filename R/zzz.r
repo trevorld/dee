@@ -10,7 +10,3 @@ as_coords <- function(x, y = NULL) {
     }
     p
 }
-
-default_options <- list(dee.sep = ",",
-                        dee.origin_at_bottom = FALSE,
-                        dee.height = NULL)

@@ -1,5 +1,5 @@
 test_that("`M()`", {
-    do.call(rlang::local_options, default_options)
+    do.call(rlang::local_options, dee_options(default = TRUE))
     expect_equal(MZ(1:2, 1:2) |> format(),
                  "M 1,1 2,2 Z")
     expect_equal(mz(1:2, 1:2) |> format(),
@@ -20,7 +20,7 @@ test_that("`M()`", {
 })
 
 test_that("`L()`", {
-    do.call(rlang::local_options, default_options)
+    do.call(rlang::local_options, dee_options(default = TRUE))
     expect_equal(LZ(1:2, 1:2) |> format(),
                  "L 1,1 2,2 Z")
     expect_equal(lz(1:2, 1:2) |> format(),
@@ -56,7 +56,7 @@ test_that("`L()`", {
 })
 
 test_that("`Q()`", {
-    do.call(rlang::local_options, default_options)
+    do.call(rlang::local_options, dee_options(default = TRUE))
     expect_equal(QZ(1:2, 1:2, 1:2, 1:2) |> format(),
                  "Q 1,1 1,1 2,2 2,2 Z")
     expect_equal(qz(1:2, 1:2, 1:2, 1:2) |> format(),
@@ -80,7 +80,7 @@ test_that("`Q()`", {
 })
 
 test_that("`C()`", {
-    do.call(rlang::local_options, default_options)
+    do.call(rlang::local_options, dee_options(default = TRUE))
     expect_equal(CZ(1:2, 1:2, 1:2, 1:2, 1:2, 1:2) |> format(),
                  "C 1,1 1,1 1,1 2,2 2,2 2,2 Z")
     expect_equal(cz(1:2, 1:2, 1:2, 1:2, 1:2, 1:2) |> format(),
@@ -104,7 +104,7 @@ test_that("`C()`", {
 })
 
 test_that("`A()`", {
-    do.call(rlang::local_options, default_options)
+    do.call(rlang::local_options, dee_options(default = TRUE))
     expect_equal(AZ(1:2, 1:2, 45, 0, 0, 1:2, 1:2) |> format(),
                  "A 1,1 45,0,0 1,1 2,2 45,0,0 2,2 Z")
     expect_equal(az(1:2, 1:2, 45, 0, 0, 1:2, 1:2) |> format(),

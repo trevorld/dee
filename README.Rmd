@@ -77,7 +77,7 @@ SVG(width = 100, height = 100, viewbox = TRUE) |>
     svg_path(d, fill = "cyan", stroke = "black", stroke_width = 2, attrs = attrs)
 ```
 
-One can used the `dee.origin_at_bottom` and `dee.height` options if one
+One can use the `dee.origin_at_bottom` and `dee.height` options if one
 prefers to think of the origin being at the bottom left corner (as is typical
 with R graphics) instead of the top left corner (as is typical with the svg format).
 

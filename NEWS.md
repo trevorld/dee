@@ -1,50 +1,28 @@
 dee 0.1.0 (development)
 =======================
 
-New features
-------------
+Initial features
+----------------
 
 * `dee()` creates "dee" class objects.
-* Absolute coordinate helpers:
 
-  + `A()`
-  + `AZ()`
-  + `C()`
-  + `CZ()`
-  + `H()`
-  + `HZ()`
-  + `L()`
-  + `LZ()`
-  + `M()`
-  + `MZ()`
-  + `Q()`
-  + `QZ()`
-  + `S()`
-  + `SZ()`
-  + `T()`
-  + `TZ()`
-  + `V()`
-  + `VZ()`
-  + `Z()`
+  + Can be plotted with `plot.dee()` if suggested packages `{omsvg}` and `{svgparser}` are installed.
 
-* Relative coordinate helpers:
+* `dee_options()` returns a list of (current or default) `{dee}` package option values.
+* Absolute coordinate path command helpers:
 
-  + `aa()`
-  + `az()`
-  + `cc()`
-  + `cz()`
-  + `hh()`
-  + `hz()`
-  + `ll()`
-  + `lz()`
-  + `mm()`
-  + `mz()`
-  + `qq()`
-  + `qz()`
-  + `ss()`
-  + `sz()`
-  + `tt()`
-  + `tz()`
-  + `vv()`
-  + `vz()`
-  + `zz()`
+  + `A()`, `AZ()` are the elliptical arc curve commands.
+  + `C()`, `CZ()`, `S()`, `SZ()` are the cubic Bézier curve commands.
+  + `L()`, `LZ()`, `H()`, `HZ()`, `V()`, `VZ()` are the "lineto" commands.
+  + `M()`, `MZ()` are the "moveto" commands.
+  + `Q()`, `QZ()`, `T()`, `TZ()` are the quadratic Bézier curve commands.
+  + `Z()` is the "closepath" command.
+
+* Relative coordinate path command helpers:
+
+  + `aa()`, `az()` are the elliptical arc curve commands.
+  + `cc()`, `cz()`, `ss()`, `sz()` are the cubic Bézier curve commands.
+  + `ll()`, `lz()`, `hh()`, `hz()`, `vv()`, `vz()` are the "lineto" commands.
+  + `mm()`, `mz()` are the "moveto" commands.
+  + `qq()`, `qz()`, `tt()`, `tz()` are the quadratic Bézier curve commands.
+  + `zz()` is the "closepath" command.

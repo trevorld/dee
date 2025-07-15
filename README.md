@@ -98,7 +98,7 @@ SVG(width = 100, height = 100, viewbox = TRUE) |>
   <path d="M 10,10 10,90 90,90 90,10 Z M 50,22 22,50 50,78 78,50 Z" stroke="black" stroke-width="2" fill="cyan" fill-rule="evenodd"/>
 </svg><!--/html_preserve-->
 
-One can used the `dee.origin_at_bottom` and `dee.height` options if one
+One can use the `dee.origin_at_bottom` and `dee.height` options if one
 prefers to think of the origin being at the bottom left corner (as is typical
 with R graphics) instead of the top left corner (as is typical with the svg format).
 

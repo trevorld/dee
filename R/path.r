@@ -191,10 +191,10 @@ vz <- function(...) {
     vv(...) + zz()
 }
 
-#' The quadratic Bezier curve commands
+#' The quadratic Bézier curve commands
 #'
-#' `Q()` and `qq()` draw quadratic Bezier curves
-#' `T()` and `tt()` draw quadratic Bezier curves assuming the control point is the reflection of the previous Bezier curve command.
+#' `Q()` and `qq()` draw quadratic Bézier curves
+#' `T()` and `tt()` draw quadratic Bézier curves assuming the control point is the reflection of the previous Bézier curve command.
 # `QZ()`, `qz()`, `TZ()`, and `tz()` are variants that automatically add a "closepath".
 #'
 #' @inheritParams M
@@ -304,10 +304,10 @@ tz <- function(...) {
     tt(...) + zz()
 }
 
-#' The cubic Bezier curve commands
+#' The cubic Bézier curve commands
 #'
-#' `C()` and `cc()` draw cubic Bezier curves
-#' `S()` and `ss()` draw cubic Bezier curves assuming the first control point is the reflection of the previous Bezier curve command.
+#' `C()` and `cc()` draw cubic Bézier curves
+#' `S()` and `ss()` draw cubic Bézier curves assuming the first control point is the reflection of the previous Bézier curve command.
 # `CZ()`, `cz()`, `SZ()`, and `sz()` are variants that automatically add a "closepath".
 #'
 #' @inheritParams Q
