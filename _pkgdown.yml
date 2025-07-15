@@ -4,3 +4,18 @@ development:
     mode: auto
 template:
   bootstrap: 5
+reference:
+    - title: "svg d path commands"
+      desc: ""
+      contents:
+        - ends_with("Z")
+    - title: "dee class objects"
+      desc: ""
+      contents:
+        - ends_with("dee")
+    - title: "Package options"
+      desc: ""
+      contents:
+          - dee_options
+          - dee-package
+

@@ -9,7 +9,7 @@
 \alias{tt}
 \alias{TZ}
 \alias{tz}
-\title{The quadratic Bezier curve commands}
+\title{The quadratic Bézier curve commands}
 \usage{
 Q(
   x1,
@@ -82,8 +82,8 @@ Else a numeric vector.}
 A \code{\link[=dee]{dee()}} object.
 }
 \description{
-\code{Q()} and \code{qq()} draw quadratic Bezier curves
-\code{T()} and \code{tt()} draw quadratic Bezier curves assuming the control point is the reflection of the previous Bezier curve command.
+\code{Q()} and \code{qq()} draw quadratic Bézier curves
+\code{T()} and \code{tt()} draw quadratic Bézier curves assuming the control point is the reflection of the previous Bézier curve command.
 }
 \examples{
 M(1, 1) + Q(2, 2, 3, 3) + T(4, 4) + Z()

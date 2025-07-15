@@ -9,7 +9,7 @@
 \alias{ss}
 \alias{SZ}
 \alias{sz}
-\title{The cubic Bezier curve commands}
+\title{The cubic Bézier curve commands}
 \usage{
 C(
   x1,
@@ -95,8 +95,8 @@ Else a numeric vector.}
 A \code{\link[=dee]{dee()}} object.
 }
 \description{
-\code{C()} and \code{cc()} draw cubic Bezier curves
-\code{S()} and \code{ss()} draw cubic Bezier curves assuming the first control point is the reflection of the previous Bezier curve command.
+\code{C()} and \code{cc()} draw cubic Bézier curves
+\code{S()} and \code{ss()} draw cubic Bézier curves assuming the first control point is the reflection of the previous Bézier curve command.
 }
 \examples{
 M(1, 1) + C(2, 2, 3, 3, 4, 4) + Z()
