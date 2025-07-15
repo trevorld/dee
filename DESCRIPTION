@@ -16,6 +16,7 @@ Imports:
     rlang,
     vctrs
 Suggests:
+    grDevices,
     omsvg,
     svgparser,
     testthat

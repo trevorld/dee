@@ -27,6 +27,8 @@ remotes::install_github("trevorld/dee")
 
 ## <a name="examples">Examples</a>
 
+**Note:** the `<svg>` tags below are not rendered by Github but they are rendered at the [package website](https://trevorldavis.com/R/dee/dev/#examples).
+
 
 ``` r
 library("dee", warn.conflicts = FALSE) # masks `stats::C()`
@@ -42,6 +44,7 @@ print(d)
 ```
 
 ```
+## <dee[1]>
 ## M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 Z
 ```
 
@@ -78,6 +81,7 @@ print(d)
 ```
 
 ```
+## <dee[1]>
 ## M 10,10 10,90 90,90 90,10 Z 
 ## M 50,22 22,50 50,78 78,50 Z
 ```
@@ -112,6 +116,7 @@ print(t1)
 ```
 
 ```
+## <dee[1]>
 ## M 10,10 40,40 70,10 Z
 ```
 
@@ -120,6 +125,7 @@ print(t2)
 ```
 
 ```
+## <dee[1]>
 ## M 10,90 40,60 70,90 Z
 ```
 

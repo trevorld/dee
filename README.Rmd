@@ -29,6 +29,8 @@ remotes::install_github("trevorld/dee")
 
 ## <a name="examples">Examples</a>
 
+**Note:** the `<svg>` tags below are not rendered by Github but they are rendered at the [package website](https://trevorldavis.com/R/dee/dev/#examples).
+
 ```{r heart}
 library("dee", warn.conflicts = FALSE) # masks `stats::C()`
 # https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d#example
