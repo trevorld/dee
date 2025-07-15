@@ -12,12 +12,14 @@ Depends:
     R (>= 4.2)
 Imports:
     affiner (>= 0.2.0),
+    grid,
     rlang,
     vctrs
 Suggests:
     omsvg,
+    svgparser,
     testthat
-Remotes: trevorld/affiner
+Remotes: trevorld/affiner, coolbutuseless/svgparser
 License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
