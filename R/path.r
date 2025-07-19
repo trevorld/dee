@@ -24,6 +24,8 @@ zz <- function() dee("z")
 #' @param origin_at_bottom,height If `origin_at_bottom` is `TRUE` then
 #'                                `y` (and any `y1` and `y2`) coordinates is transformed by
 #'                                `height - y` for absolute coordinates and `-y` for relative coordinates.
+#' @param digits `x` and `y` (and any `x1`, `y1`, `x2`, `y2`) will be transformed by `round(, digits)`.
+#'               An `Inf` (default) means no rounding.
 #' @return A [dee()] object.
 #' @examples
 #' M(1, 1) + L(2, 2) + Z()
@@ -32,7 +34,8 @@ zz <- function() dee("z")
 M <- function(x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p <- as_coords(x, y)
     x <- p$x
@@ -40,6 +43,8 @@ M <- function(x, y = NULL, ...,
     if (isTRUE(origin_at_bottom)) {
         y <- height - y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     paste(c("M", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
 
@@ -48,7 +53,8 @@ M <- function(x, y = NULL, ...,
 mm <- function(x, y = NULL, ...,
                sep = getOption("dee.sep", ","),
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p <- as_coords(x, y)
     x <- p$x
@@ -56,6 +62,8 @@ mm <- function(x, y = NULL, ...,
     if (isTRUE(origin_at_bottom)) {
         y <- -y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     paste(c("m", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
 
@@ -88,7 +96,8 @@ mz <- function(...) {
 L <- function(x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p <- as_coords(x, y)
     x <- p$x
@@ -96,6 +105,8 @@ L <- function(x, y = NULL, ...,
     if (isTRUE(origin_at_bottom)) {
         y <- height - y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     paste(c("L", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
 
@@ -104,7 +115,8 @@ L <- function(x, y = NULL, ...,
 ll <- function(x, y = NULL, ...,
                sep = getOption("dee.sep", ","),
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p <- as_coords(x, y)
     x <- p$x
@@ -112,6 +124,8 @@ ll <- function(x, y = NULL, ...,
     if (isTRUE(origin_at_bottom)) {
         y <- -y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     paste(c("l", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
 
@@ -129,15 +143,19 @@ lz <- function(...) {
 
 #' @rdname L
 #' @export
-H <- function(x) {
+H <- function(x, ..., digits = getOption("dee.digits", Inf)) {
+    check_dots_empty()
     stopifnot(is.numeric(x))
+    x <- round(x, digits)
     paste(c("H", x), collapse = " ") |> dee()
 }
 
 #' @rdname L
 #' @export
-hh <- function(x) {
+hh <- function(x, ..., digits = getOption("dee.digits", Inf)) {
+    check_dots_empty()
     stopifnot(is.numeric(x))
+    x <- round(x, digits)
     paste(c("h", x), collapse = " ") |> dee()
 }
 
@@ -157,12 +175,14 @@ hz <- function(...) {
 #' @export
 V <- function(y, ...,
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     stopifnot(is.numeric(y))
     if (isTRUE(origin_at_bottom)) {
         y <- height - y
     }
+    y <- round(y, digits)
     paste(c("V", y), collapse = " ") |> dee()
 }
 
@@ -170,12 +190,14 @@ V <- function(y, ...,
 #' @export
 vv <- function(y, ...,
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     stopifnot(is.numeric(y))
     if (isTRUE(origin_at_bottom)) {
         y <- -y
     }
+    y <- round(y, digits)
     paste(c("v", y), collapse = " ") |> dee()
 }
 
@@ -209,7 +231,8 @@ vz <- function(...) {
 Q <- function(x1, y1 = NULL, x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p1 <- as_coords(x1, y1)
     p <- as_coords(x, y)
@@ -221,6 +244,10 @@ Q <- function(x1, y1 = NULL, x, y = NULL, ...,
         y1 <- height - y1
         y <- height - y
     }
+    x1 <- round(x1, digits)
+    y1 <- round(y1, digits)
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy1 <- paste(x1, y1, sep = sep)
     xy <- paste(x, y, sep = sep)
     paste(c("Q", paste(xy1, xy)), collapse = " ") |> dee()
@@ -231,7 +258,8 @@ Q <- function(x1, y1 = NULL, x, y = NULL, ...,
 qq <- function(x1, y1 = NULL, x, y = NULL, ...,
                sep = getOption("dee.sep", ","),
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p1 <- as_coords(x1, y1)
     p <- as_coords(x, y)
@@ -243,6 +271,10 @@ qq <- function(x1, y1 = NULL, x, y = NULL, ...,
         y1 <- -y1
         y <- -y
     }
+    x1 <- round(x1, digits)
+    y1 <- round(y1, digits)
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy1 <- paste(x1, y1, sep = sep)
     xy <- paste(x, y, sep = sep)
     paste(c("q", paste(xy1, xy)), collapse = " ") |> dee()
@@ -265,7 +297,8 @@ qz <- function(...) {
 T <- function(x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p <- as_coords(x, y)
     x <- p$x
@@ -273,6 +306,8 @@ T <- function(x, y = NULL, ...,
     if (isTRUE(origin_at_bottom)) {
         y <- height - y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     paste(c("T", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
 
@@ -281,7 +316,8 @@ T <- function(x, y = NULL, ...,
 tt <- function(x, y = NULL, ...,
                sep = getOption("dee.sep", ","),
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p <- as_coords(x, y)
     x <- p$x
@@ -289,6 +325,8 @@ tt <- function(x, y = NULL, ...,
     if (isTRUE(origin_at_bottom)) {
         y <- -y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     paste(c("t", paste(x, y, sep = sep)), collapse = " ") |> dee()
 }
 
@@ -322,7 +360,8 @@ tz <- function(...) {
 C <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p1 <- as_coords(x1, y1)
     p2 <- as_coords(x2, y2)
@@ -338,6 +377,12 @@ C <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL, ...,
         y1 <- height - y1
         y <- height - y
     }
+    x1 <- round(x1, digits)
+    y1 <- round(y1, digits)
+    x2 <- round(x2, digits)
+    y2 <- round(y2, digits)
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy1 <- paste(x1, y1, sep = sep)
     xy2 <- paste(x2, y2, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -349,7 +394,8 @@ C <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL, ...,
 cc <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL,...,
                sep = getOption("dee.sep", ","),
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p1 <- as_coords(x1, y1)
     p2 <- as_coords(x2, y2)
@@ -365,6 +411,12 @@ cc <- function(x1, y1 = NULL, x2, y2 = NULL, x, y = NULL,...,
         y1 <- -y1
         y <- -y
     }
+    x2 <- round(x2, digits)
+    y2 <- round(y2, digits)
+    x1 <- round(x1, digits)
+    y1 <- round(y1, digits)
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy1 <- paste(x1, y1, sep = sep)
     xy2 <- paste(x2, y2, sep = sep)
     xy <- paste(x, y, sep = sep)
@@ -388,7 +440,8 @@ cz <- function(...) {
 S <- function(x2, y2 = NULL, x, y = NULL,...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p2 <- as_coords(x2, y2)
     p <- as_coords(x, y)
@@ -400,6 +453,10 @@ S <- function(x2, y2 = NULL, x, y = NULL,...,
         y2 <- height - y2
         y <- height - y
     }
+    x2 <- round(x2, digits)
+    y2 <- round(y2, digits)
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy2 <- paste(x2, y2, sep = sep)
     xy <- paste(x, y, sep = sep)
     paste(c("S", paste(xy2, xy)), collapse = " ") |> dee()
@@ -410,7 +467,8 @@ S <- function(x2, y2 = NULL, x, y = NULL,...,
 ss <- function(x2, y2 = NULL, x, y = NULL, ...,
                sep = getOption("dee.sep", ","),
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     p2 <- as_coords(x2, y2)
     p <- as_coords(x, y)
@@ -422,6 +480,10 @@ ss <- function(x2, y2 = NULL, x, y = NULL, ...,
         y2 <- -y2
         y <- -y
     }
+    x2 <- round(x2, digits)
+    y2 <- round(y2, digits)
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy2 <- paste(x2, y2, sep = sep)
     xy <- paste(x, y, sep = sep)
     paste(c("s", paste(xy2, xy)), collapse = " ") |> dee()
@@ -464,7 +526,8 @@ A <- function(rx, ry = rx,
               x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
               origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-              height = getOption("dee.height", NULL)) {
+              height = getOption("dee.height", NULL),
+              digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     stopifnot(is.numeric(rx), is.numeric(rx))
     rxy <- paste(rx, ry, sep = sep)
@@ -484,6 +547,8 @@ A <- function(rx, ry = rx,
     if (isTRUE(origin_at_bottom)) {
         y <- height - y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy <- paste(x, y, sep = sep)
     paste(c("A", paste(rxy, rls, xy)), collapse = " ") |> dee()
 }
@@ -493,7 +558,8 @@ A <- function(rx, ry = rx,
 aa <- function(rx, ry = rx, x_axis_rotation = 0, large_arc_flag = FALSE, sweep_flag = FALSE, x, y = NULL,...,
                sep = getOption("dee.sep", ","),
                origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-               height = getOption("dee.height", NULL)) {
+               height = getOption("dee.height", NULL),
+               digits = getOption("dee.digits", Inf)) {
     check_dots_empty()
     stopifnot(is.numeric(rx), is.numeric(rx))
     rxy <- paste(rx, ry, sep = sep)
@@ -512,6 +578,8 @@ aa <- function(rx, ry = rx, x_axis_rotation = 0, large_arc_flag = FALSE, sweep_f
     if (isTRUE(origin_at_bottom)) {
         y <- -y
     }
+    x <- round(x, digits)
+    y <- round(y, digits)
     xy <- paste(x, y, sep = sep)
     paste(c("a", paste(rxy, rls, xy)), collapse = " ") |> dee()
 }

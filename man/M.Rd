@@ -13,7 +13,8 @@ M(
   ...,
   sep = getOption("dee.sep", ","),
   origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-  height = getOption("dee.height", NULL)
+  height = getOption("dee.height", NULL),
+  digits = getOption("dee.digits", Inf)
 )
 
 mm(
@@ -22,7 +23,8 @@ mm(
   ...,
   sep = getOption("dee.sep", ","),
   origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-  height = getOption("dee.height", NULL)
+  height = getOption("dee.height", NULL),
+  digits = getOption("dee.digits", Inf)
 )
 
 MZ(...)
@@ -42,6 +44,9 @@ Else a numeric vector.}
 \item{origin_at_bottom, height}{If \code{origin_at_bottom} is \code{TRUE} then
 \code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by
 \code{height - y} for absolute coordinates and \code{-y} for relative coordinates.}
+
+\item{digits}{\code{x} and \code{y} (and any \code{x1}, \code{y1}, \code{x2}, \code{y2}) will be transformed by \code{round(, digits)}.
+An \code{Inf} (default) means no rounding.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.

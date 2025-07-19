@@ -22,14 +22,15 @@ default_options <- list(dee.sep = ",",
 #' @export
 dee_options <- function (..., default = FALSE) {
     dee_op <- list(dee.attrs = NULL,
-                   dee.height = NULL,
-                   dee.width = NULL,
                    dee.background_color = NULL,
+                   dee.digits = Inf,
                    dee.fill = NULL,
+                   dee.height = NULL,
+                   dee.origin_at_bottom = FALSE,
+                   dee.sep = ",",
                    dee.stroke = NULL,
                    dee.stroke_width = NULL,
-                   dee.origin_at_bottom = FALSE,
-                   dee.sep = ",")
+                   dee.width = NULL)
     l <- list(...)
     stopifnot(all(names(l) %in% names(dee_op)))
     if (isFALSE(default)) {
