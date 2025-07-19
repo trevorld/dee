@@ -12,14 +12,15 @@ Utilities to build an svg path 'd' \url{https://developer.mozilla.org/en-US/docs
 The following \code{dee} option may be set globally via \code{\link[base:options]{base::options()}}:
 \describe{
 \item{dee.attrs}{\code{\link[=plot.dee]{plot.dee()}} passes this to \code{\link[omsvg:svg_path]{omsvg::svg_path()}}'s \code{attrs} argument.}
-\item{dee.height}{Passed to \code{height} arguments; the height of svg image (in pixels).}
-\item{dee.width}{Passed to \code{width} arguments; the width of svg image (in pixels).}
 \item{dee.background_color}{Passed to \code{\link[=plot.dee]{plot.dee()}}'s \code{background_color} argument.}
+\item{dee.digits}{Passed to \code{digits} argument of svg d path command functions.}
 \item{dee.fill}{\code{\link[=plot.dee]{plot.dee()}} passes this to \code{\link[omsvg:svg_path]{omsvg::svg_path()}}'s \code{fill} argument.}
-\item{dee.stroke}{\code{\link[=plot.dee]{plot.dee()}} passes this to \code{\link[omsvg:svg_path]{omsvg::svg_path()}}'s \code{stroke} argument.}
-\item{dee.stroke_width}{\code{\link[=plot.dee]{plot.dee()}} passes this to \code{\link[omsvg:svg_path]{omsvg::svg_path()}}'s \code{stroke_width} argument.}
+\item{dee.height}{Passed to \code{height} arguments; the height of svg image (in pixels).}
 \item{dee.origin_at_bottom}{Passed to \code{origin_at_bottom} argument of svg d path command functions.}
 \item{dee.sep}{Passed to \code{sep} argument of svg d path command functions.}
+\item{dee.stroke}{\code{\link[=plot.dee]{plot.dee()}} passes this to \code{\link[omsvg:svg_path]{omsvg::svg_path()}}'s \code{stroke} argument.}
+\item{dee.stroke_width}{\code{\link[=plot.dee]{plot.dee()}} passes this to \code{\link[omsvg:svg_path]{omsvg::svg_path()}}'s \code{stroke_width} argument.}
+\item{dee.width}{Passed to \code{width} arguments; the width of svg image (in pixels).}
 }
 }
 

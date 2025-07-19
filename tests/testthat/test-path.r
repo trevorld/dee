@@ -17,6 +17,12 @@ test_that("`M()`", {
                  "m 1 -1 2 -2 z")
     expect_equal(MZ(p) |> format(),
                  "M 1 7 2 6 Z")
+
+    expect_equal(M(1.25, 1.75) |> format(),
+                 "M 1.25 8.25")
+    rlang::local_options(dee.digits = 0)
+    expect_equal(M(1.25, 1.75) |> format(),
+                 "M 1 8")
 })
 
 test_that("`L()`", {
