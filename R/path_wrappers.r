@@ -14,7 +14,7 @@ RECT <- function(x, y = NULL, w, h, ...) {
     x <- p$x
     y <- p$y
     .mapply(RECT_HELPER, list(x = x, y = y, w = w, h = h), list(...)) |>
-        as.character() |> dee()
+        Reduce(`+.dee`, x = _)
 }
 
 RECT_HELPER <- function(x, y, w, h, ...) {
@@ -43,7 +43,7 @@ CIRCLE <- function(x, y = NULL, r, ...) {
     x <- p$x
     y <- p$y
     .mapply(CIRCLE_HELPER, list(x = x, y = y, r = r), list(...)) |>
-        as.character() |> dee()
+        Reduce(`+.dee`, x = _)
 }
 
 CIRCLE_HELPER <- function(x, y, r, ...) {
