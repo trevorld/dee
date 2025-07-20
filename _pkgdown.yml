@@ -9,6 +9,11 @@ reference:
       desc: ""
       contents:
         - ends_with("Z")
+    - title: "svg d path convenience wrappers"
+      desc: ""
+      contents:
+        - CIRCLE
+        - RECT
     - title: "dee class objects"
       desc: ""
       contents:
