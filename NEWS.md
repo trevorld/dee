@@ -26,3 +26,8 @@ Initial features
   + `mm()`, `mz()` are the "moveto" commands.
   + `qq()`, `qz()`, `tt()`, `tz()` are the quadratic Bézier curve commands.
   + `zz()` is the "closepath" command.
+
+* Convenience wrappers:
+
+  + `CIRCLE()` is a wrapper around `M()` and `AZ()` to build circle paths.
+  + `RECT()` is a wrapper around `MZ()` to build rectangle paths.

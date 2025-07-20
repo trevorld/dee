@@ -25,6 +25,18 @@ test_that("`M()`", {
                  "M 1 8")
 })
 
+test_that("`CIRCLE()`", {
+    do.call(rlang::local_options, dee_options(default = TRUE))
+    expect_true(CIRCLE(5, 5, 2) |> inherits("dee"))
+    # plot(CIRCLE(5, 5, 4), height = 10, width = 10, fill = "red")
+})
+
+test_that("`RECT()`", {
+    do.call(rlang::local_options, dee_options(default = TRUE))
+    expect_equal(RECT(x = 10, y = 10, w = 6, h = 4) |> format(),
+                 "M 7,8 7,12 13,12 13,8 Z")
+})
+
 test_that("`L()`", {
     do.call(rlang::local_options, dee_options(default = TRUE))
     expect_equal(LZ(1:2, 1:2) |> format(),
