@@ -2,6 +2,7 @@
 #'
 #' `RECT()` is a wrapper around `MZ()` to create
 #' rectangle shaped paths.
+#' It's vectorized in its `x`, `y`, `w`, and `h` arguments.
 #' @inheritParams M
 #' @param w,h The width and height of the rectangle.
 #' @param ... Passed to [MZ()].
@@ -37,7 +38,9 @@ RECT_HELPER <- function(x, y, w, h, ...) {
 #'
 #' `ELLIPSE()` is a wrapper around `M()` and `AZ()` to create
 #' ellipse shaped paths.
+#' It's vectorized in its `x`, `y`, `rx`, and `ry` arguments.
 #' `CIRCLE()` is a special case to create circle shaped paths.
+#' It's vectorized in its `x`, `y`, and `r` arguments.
 #' @inheritParams M
 #' @param r The radius of the circle.
 #' @param rx,ry The radii of the ellipse.
@@ -70,16 +73,17 @@ CIRCLE <- function(x, y = NULL, r, ...) {
 }
 
 ELLIPSE_HELPER <- function(x, y, rx, ry, ...) {
-    M(x, y + ry, ...) + 
+    M(x, y + ry, ...) +
         AZ(rx, ry, 0, 0, 0, x, c(y - ry, y + ry), ...)
 }
 
 #' Polygon path convenience wrapper
 #'
 #' `POLYGON()` is a wrapper around `MZ()` to create
-#' polygon shaped paths.  
+#' polygon shaped paths.
 #' If the argument `offset` is nonzero
 #' will use [polyclip::polyoffset()] to compute an offset region.
+#' It's vectorized in its `offset` argument.
 #' @inheritParams M
 #' @param ... Passed to [MZ()].
 #' @param offset If a positive number the distance for *outward* polygon offsetting.  If a negative number the distance for *inward* polygon offsetting.
@@ -90,12 +94,10 @@ ELLIPSE_HELPER <- function(x, y, rx, ry, ...) {
 #' @return A [dee()] object.
 #' @examples
 #' l <- list(x = c(2, 5, 8, 5), y = c(5, 8, 5, 2))
-#' po <- POLYGON(l, offset = 1)
-#' p <- POLYGON(l)
-#' pi <- POLYGON(l, offset = -1)
+#' d <- POLYGON(l, offset = c(1, 0, -1))
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
 #'     requireNamespace("svgparser", quietly = TRUE)) {
-#'   plot(po + p + pi, height = 10, width = 10,
+#'   plot(d, height = 10, width = 10,
 #'        attrs = list(fill_rule = "evenodd"),
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
@@ -105,14 +107,22 @@ POLYGON <- function(x, y = NULL, ...,
                     offset = 0,
                     linejoin = c("miter", "round"),
                     miterlimit = 4) {
-    if (offset == 0)
+    if (length(offset) == 1L && offset == 0)
         return (MZ(x, y, ...))
     stopifnot(requireNamespace("polyclip", quietly = TRUE))
     p <- as_coords(x, y)
     x <- p$x
     y <- p$y
     jointype <- match.arg(linejoin)
+    lapply(offset, POLYGON_HELPER, ..., x = x, y = y, jointype = jointype, miterlim = miterlimit) |>
+        Reduce(`+.dee`, x = _)
+}
+
+POLYGON_HELPER <- function(offset, ..., x, y, jointype, miterlim) {
     xy <- polyclip::polyoffset(list(x = x, y = y), offset,
-                               jointype = jointype, miterlim = miterlimit)
+                               jointype = jointype, miterlim = miterlim)
+    if (length(xy) == 0L) {
+        rlang::abort(paste0("`polyoffset()` did not return a polygon for `offset =`", offset, "`"))
+    }
     MZ(xy, ...)
 }

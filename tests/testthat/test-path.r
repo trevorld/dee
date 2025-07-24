@@ -37,7 +37,7 @@ test_that("`ELLIPSE()`", {
 test_that("`POLYGON()`", {
     skip_if_not_installed("polyclip")
     skip_on_cran()
-    do.call(rlang::local_options, 
+    do.call(rlang::local_options,
             dee_options(dee.digits = 0, default = TRUE))
     l <- list(x = c(4, 4, 8, 8), y = c(4, 8, 8, 4))
     expect_equal(POLYGON(l) |> format(),
@@ -46,6 +46,7 @@ test_that("`POLYGON()`", {
                  "M 9,9 3,9 3,3 9,3 Z")
     expect_equal(POLYGON(l, offset = -1) |> format(),
                  "M 7,7 5,7 5,5 7,5 Z")
+    expect_error(POLYGON(l, offset = -10), "did not return a polygon")
 })
 
 test_that("`RECT()`", {

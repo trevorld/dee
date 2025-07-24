@@ -37,15 +37,14 @@ A \code{\link[=dee]{dee()}} object.
 polygon shaped paths.
 If the argument \code{offset} is nonzero
 will use \code{\link[polyclip:polyoffset]{polyclip::polyoffset()}} to compute an offset region.
+It's vectorized in its \code{offset} argument.
 }
 \examples{
 l <- list(x = c(2, 5, 8, 5), y = c(5, 8, 5, 2))
-po <- POLYGON(l, offset = 1)
-p <- POLYGON(l)
-pi <- POLYGON(l, offset = -1)
+d <- POLYGON(l, offset = c(1, 0, -1))
 if (requireNamespace("omsvg", quietly = TRUE) &&
     requireNamespace("svgparser", quietly = TRUE)) {
-  plot(po + p + pi, height = 10, width = 10,
+  plot(d, height = 10, width = 10,
        attrs = list(fill_rule = "evenodd"),
        fill = "red", stroke = "black", stroke_width = 4)
 }

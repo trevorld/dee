@@ -27,7 +27,9 @@ A \code{\link[=dee]{dee()}} object.
 \description{
 \code{ELLIPSE()} is a wrapper around \code{M()} and \code{AZ()} to create
 ellipse shaped paths.
+It's vectorized in its \code{x}, \code{y}, \code{rx}, and \code{ry} arguments.
 \code{CIRCLE()} is a special case to create circle shaped paths.
+It's vectorized in its \code{x}, \code{y}, and \code{r} arguments.
 }
 \examples{
 CIRCLE(x = 5, y = 5, r = 2)

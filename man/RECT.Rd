@@ -22,6 +22,7 @@ A \code{\link[=dee]{dee()}} object.
 \description{
 \code{RECT()} is a wrapper around \code{MZ()} to create
 rectangle shaped paths.
+It's vectorized in its \code{x}, \code{y}, \code{w}, and \code{h} arguments.
 }
 \examples{
 RECT(x = 5, y = 5, w = 4, h = 6)
