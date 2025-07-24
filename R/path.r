@@ -30,6 +30,12 @@ zz <- function() dee("z")
 #' @examples
 #' M(1, 1) + L(2, 2) + Z()
 #' M(1, 1) + ll(1, 1) + zz()
+#' d <- MZ(x = c(2, 5, 8, 5), y = c(5, 8, 5, 2))
+#' if (requireNamespace("omsvg", quietly = TRUE) &&
+#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'   plot(d, height = 10, width = 10,
+#'        fill = "red", stroke = "black", stroke_width = 4)
+#' }
 #' @export
 M <- function(x, y = NULL, ...,
               sep = getOption("dee.sep", ","),
@@ -91,6 +97,12 @@ mz <- function(...) {
 #' @examples
 #' M(1, 1) + L(2, 2) + Z()
 #' M(1, 1) + ll(1, 1) + zz()
+#' d <- M(1,1) + L(5,8) + H(8) + V(3) + Z()
+#' if (requireNamespace("omsvg", quietly = TRUE) &&
+#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'   plot(d, height = 10, width = 10,
+#'        fill = "red", stroke = "black", stroke_width = 4)
+#' }
 #' @return A [dee()] object.
 #' @export
 L <- function(x, y = NULL, ...,
@@ -520,6 +532,12 @@ sz <- function(...) {
 #' @examples
 #' M(1, 1) + A(rx = 1, x = 2, y = 2) + Z()
 #' M(1, 1) + aa(rx = 1, x = 1, y = 1) + zz()
+#' e <- M(5, 8) + AZ(2, 3, x = 5, y = c(2, 8))
+#' if (requireNamespace("omsvg", quietly = TRUE) &&
+#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'   plot(e, height = 10, width = 10,
+#'        fill = "red", stroke = "black", stroke_width = 4)
+#' }
 #' @export
 A <- function(rx, ry = rx,
               x_axis_rotation = 0, large_arc_flag = FALSE, sweep_flag = FALSE,

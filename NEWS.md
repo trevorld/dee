@@ -29,5 +29,7 @@ Initial features
 
 * Convenience wrappers:
 
-  + `CIRCLE()` is a wrapper around `M()` and `AZ()` to build circle paths.
+  + `ELLIPSE()` is a wrapper around `M()` and `AZ()` to build ellipse paths. `CIRCLE()` is a special case to build circle paths.
+  + `POLYGON()` is a wrapper around `MZ()` to build polygon paths.
+    If its argument `offset` is nonzero will compute an offset region.
   + `RECT()` is a wrapper around `MZ()` to build rectangle paths.
