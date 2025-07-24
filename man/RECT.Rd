@@ -20,9 +20,15 @@ Else a numeric vector.}
 A \code{\link[=dee]{dee()}} object.
 }
 \description{
-\code{MZ_RECT()} is a wrapper around \code{MZ()} to create
+\code{RECT()} is a wrapper around \code{MZ()} to create
 rectangle shaped paths.
 }
 \examples{
 RECT(x = 5, y = 5, w = 4, h = 6)
+if (requireNamespace("omsvg", quietly = TRUE) &&
+    requireNamespace("svgparser", quietly = TRUE)) {
+  plot(RECT(x = 5, y = 5, w = 4, h = 6),
+       height = 10, width = 10,
+       fill = "red", stroke = "black", stroke_width = 4)
+}
 }

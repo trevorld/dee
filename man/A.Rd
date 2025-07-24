@@ -80,4 +80,10 @@ A \code{\link[=dee]{dee()}} object.
 \examples{
 M(1, 1) + A(rx = 1, x = 2, y = 2) + Z()
 M(1, 1) + aa(rx = 1, x = 1, y = 1) + zz()
+e <- M(5, 8) + AZ(2, 3, x = 5, y = c(2, 8))
+if (requireNamespace("omsvg", quietly = TRUE) &&
+    requireNamespace("svgparser", quietly = TRUE)) {
+  plot(e, height = 10, width = 10,
+       fill = "red", stroke = "black", stroke_width = 4)
+}
 }

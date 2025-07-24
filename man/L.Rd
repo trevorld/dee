@@ -95,4 +95,10 @@ A \code{\link[=dee]{dee()}} object.
 \examples{
 M(1, 1) + L(2, 2) + Z()
 M(1, 1) + ll(1, 1) + zz()
+d <- M(1,1) + L(5,8) + H(8) + V(3) + Z()
+if (requireNamespace("omsvg", quietly = TRUE) &&
+    requireNamespace("svgparser", quietly = TRUE)) {
+  plot(d, height = 10, width = 10,
+       fill = "red", stroke = "black", stroke_width = 4)
+}
 }

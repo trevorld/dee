@@ -12,7 +12,8 @@ reference:
     - title: "svg d path convenience wrappers"
       desc: ""
       contents:
-        - CIRCLE
+        - ELLIPSE
+        - POLYGON
         - RECT
     - title: "dee class objects"
       desc: ""
