@@ -29,6 +29,8 @@ Initial features
 
 * Convenience wrappers:
 
+  + `FSLASH()` and `BSLASH()` are wrappers around `MZ()` to build
+    forward/backward slash paths.
   + `ELLIPSE()` is a wrapper around `M()` and `AZ()` to build ellipse paths. `CIRCLE()` is a special case to build circle paths.
   + `POLYGON()` is a wrapper around `MZ()` to build polygon paths.
     If its argument `offset` is nonzero will compute an offset region.
