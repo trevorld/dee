@@ -12,6 +12,7 @@ reference:
     - title: "svg d path convenience wrappers"
       desc: ""
       contents:
+        - BSLASH
         - ELLIPSE
         - POLYGON
         - RECT
