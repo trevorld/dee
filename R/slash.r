@@ -1,8 +1,8 @@
 #' Forward/backward slash path convenience wrapper
 #'
-#' `FSLASH()` is a wrapper around `MZ()` to create
+#' `d_fslash()` is a wrapper around `MZ()` to create
 #' a forward slash path convenience wrapper.
-#' `BSLASH()` is a wrapper around `MZ()` to create
+#' `d_bslash()` is a wrapper around `MZ()` to create
 #' a backward slash path convenience wrapper.
 #' They are vectorized in their `y_top`, `x_right`, `y_bottom`, `x_left`,
 #' and `w` arguments. 
@@ -13,30 +13,30 @@
 #'                       This only affects the left and right ends.
 #' @param ... Passed to [MZ()].
 #' @examples
-#' d_h <- FSLASH(2, 8, 8, 2, 1)
+#' d_h <- d_fslash(2, 8, 8, 2, 1)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
 #'     requireNamespace("svgparser", quietly = TRUE)) {
 #'   plot(d_h, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
-#' d_sq <- BSLASH(2, 8, 8, 2, 1, nib = "square")
+#' d_sq <- d_bslash(2, 8, 8, 2, 1, nib = "square")
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
 #'     requireNamespace("svgparser", quietly = TRUE)) {
 #'   plot(d_sq, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
-#' d_v <- FSLASH(2, 8, 8, 2, 1, nib = "vertical")
+#' d_v <- d_fslash(2, 8, 8, 2, 1, nib = "vertical")
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
 #'     requireNamespace("svgparser", quietly = TRUE)) {
 #'   plot(d_v, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' @export
-FSLASH <- function(y_top, x_right, y_bottom, x_left, w, ...,
-                   origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-                   height = getOption("dee.height", NULL),
-                   nib = c("horizontal", "square", "vertical"),
-                   left = nib, right = nib) {
+d_fslash <- function(y_top, x_right, y_bottom, x_left, w, ...,
+                     origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+                     height = getOption("dee.height", NULL),
+                     nib = c("horizontal", "square", "vertical"),
+                     left = nib, right = nib) {
     left <- match.arg(left, c("horizontal", "square", "vertical"))
     right <- match.arg(right, c("horizontal", "square", "vertical"))
     y_top <- as.numeric(y_top)
@@ -122,9 +122,9 @@ fslash_vv <- function(y_top, x_right, y_bottom, x_left, w, ...) {
     MZ(x, y, ..., origin_at_bottom = FALSE)
 }
 
-#' @rdname FSLASH
+#' @rdname d_fslash
 #' @export
-BSLASH <- function(y_top, x_right, y_bottom, x_left, w, ...,
+d_bslash <- function(y_top, x_right, y_bottom, x_left, w, ...,
                    origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
                    height = getOption("dee.height", NULL),
                    nib = c("horizontal", "square", "vertical"),

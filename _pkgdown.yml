@@ -12,12 +12,12 @@ reference:
     - title: "svg d path convenience wrappers"
       desc: "These functions are convenience wrappers to help build svg d paths for some shapes of interest.  They all use absolute coordinates."
       contents:
-        - BSLASH
-        - ELLIPSE
-        - ISOTOXAL_2NGON
-        - REGULAR_NGON
-        - POLYGON
-        - RECT
+        - d_bslash
+        - d_ellipse
+        - d_isotoxal_2ngon
+        - d_regular_ngon
+        - d_polygon
+        - d_rect
     - title: "dee class objects"
       desc: ""
       contents:
