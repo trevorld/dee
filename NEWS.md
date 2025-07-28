@@ -38,7 +38,7 @@ Initial features
   + `d_polygon()` is a wrapper around `MZ()` to build polygon paths.
     If its argument `offset` is nonzero will compute an offset region.
 
-    + `d_isotoxal_2ngon()` is a wrapper around `d_polygon()` to create isotoxal `2n`-gon polygons (e.g. stars).
+    + `d_isotoxal_2ngon()` is a wrapper around `d_polygon()` to create isotoxal `2n`-gon polygons.  `d_star()` is an alias.
     + `d_regular_ngon()` is a wrapper around `d_polygon()` to create regular polygons.
 
   + `d_rect()` is a wrapper around `MZ()` to build rectangle paths.
