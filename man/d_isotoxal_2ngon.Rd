@@ -2,9 +2,23 @@
 % Please edit documentation in R/isotoxal_2ngon.r
 \name{d_isotoxal_2ngon}
 \alias{d_isotoxal_2ngon}
+\alias{d_star}
 \title{Isotoxal \verb{2n}-gon path convenience wrapper}
 \usage{
 d_isotoxal_2ngon(
+  x,
+  y,
+  r,
+  s,
+  n,
+  a = 90,
+  ...,
+  offset = 0,
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height")
+)
+
+d_star(
   x,
   y,
   r,
@@ -63,6 +77,25 @@ if (requireNamespace("omsvg", quietly = TRUE) &&
     requireNamespace("svgparser", quietly = TRUE)) {
   plot(d, height = 10, width = 10,
        fill = "cyan", stroke = "black", stroke_width = 4)
+}
+# `d_star()` is an alias for `d_isotoxal_2ngon()`
+# Inner exterior angle of |8/3| star is 90 degrees
+s <- affiner::isotoxal_2ngon_inner_radius(n = 8, beta_ext = 90)
+d <- d_star(x = 5, y = 5, r = 4, s = s, n = 8, a = 22.5)
+if (requireNamespace("omsvg", quietly = TRUE) &&
+    requireNamespace("svgparser", quietly = TRUE)) {
+  plot(d, height = 10, width = 10,
+       fill = "yellow", stroke = "black", stroke_width = 4)
+}
+
+# Degenerate case of inner vertex with exterior angle
+# of 180 degrees creates a regular `n`-gon.
+s <- affiner::isotoxal_2ngon_inner_radius(n = 8, beta_ext = 180)
+d <- d_star(x = 5, y = 5, r = 4, s = s, n = 8, a = 22.5)
+if (requireNamespace("omsvg", quietly = TRUE) &&
+    requireNamespace("svgparser", quietly = TRUE)) {
+  plot(d, height = 10, width = 10,
+       fill = "red", stroke = "black", stroke_width = 4)
 }
 }
 \seealso{

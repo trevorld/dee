@@ -29,6 +29,25 @@
 #'   plot(d, height = 10, width = 10,
 #'        fill = "cyan", stroke = "black", stroke_width = 4)
 #' }
+#' # `d_star()` is an alias for `d_isotoxal_2ngon()`
+#' # Inner exterior angle of |8/3| star is 90 degrees
+#' s <- affiner::isotoxal_2ngon_inner_radius(n = 8, beta_ext = 90)
+#' d <- d_star(x = 5, y = 5, r = 4, s = s, n = 8, a = 22.5)
+#' if (requireNamespace("omsvg", quietly = TRUE) &&
+#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'   plot(d, height = 10, width = 10,
+#'        fill = "yellow", stroke = "black", stroke_width = 4)
+#' }
+#'
+#' # Degenerate case of inner vertex with exterior angle
+#' # of 180 degrees creates a regular `n`-gon.
+#' s <- affiner::isotoxal_2ngon_inner_radius(n = 8, beta_ext = 180)
+#' d <- d_star(x = 5, y = 5, r = 4, s = s, n = 8, a = 22.5)
+#' if (requireNamespace("omsvg", quietly = TRUE) &&
+#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'   plot(d, height = 10, width = 10,
+#'        fill = "red", stroke = "black", stroke_width = 4)
+#' }
 #' @export
 d_isotoxal_2ngon <- function(x, y, r, s, n, a = 90, ...,
                            offset = 0,
@@ -53,6 +72,10 @@ d_isotoxal_2ngon <- function(x, y, r, s, n, a = 90, ...,
             MoreArgs) |>
         Reduce(`+.dee`, x = _)
 }
+
+#' @rdname d_isotoxal_2ngon
+#' @export
+d_star <- d_isotoxal_2ngon
 
 d_isotoxal_2ngon_helper <- function(x, y, r, s, n, a, offset, ...) {
 
