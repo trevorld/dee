@@ -108,7 +108,7 @@ We also contain vectorized convenience wrappers for some common shapes:
 s <- 0.6
 ro <- 50
 ri <- s * ro
-d <- d_circle(50, 50, c(ro, ri, ri - 3)) + d_star(50, 50, ro, s, 8)
+d <- d_circle(50, 50, c(ro, ri, ri - 3)) + d_star(50, 50, ro, s, 8, digits = 0)
 print(d)
 ```
 
