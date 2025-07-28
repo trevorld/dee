@@ -550,7 +550,7 @@ A <- function(rx, ry = rx,
     stopifnot(is.numeric(rx), is.numeric(rx))
     rxy <- paste(rx, ry, sep = sep)
 
-    x_axis_rotation <- as.numeric(affiner::degrees(x_axis_rotation))
+    x_axis_rotation <- as.numeric(degrees(x_axis_rotation))
     large_arc <- as.integer(as.logical(large_arc_flag))
     sweep <- as.integer(as.logical(sweep_flag))
     if (isTRUE(origin_at_bottom)) {

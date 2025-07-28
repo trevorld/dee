@@ -31,7 +31,14 @@ Initial features
 
   + `FSLASH()` and `BSLASH()` are wrappers around `MZ()` to build
     forward/backward slash paths.
-  + `ELLIPSE()` is a wrapper around `M()` and `AZ()` to build ellipse paths. `CIRCLE()` is a special case to build circle paths.
+  + `ELLIPSE()` is a wrapper around `M()` and `AZ()` to build ellipse paths.
+
+    + `CIRCLE()` is a wrapper around `ELLIPSE()` to build circle paths.
+
   + `POLYGON()` is a wrapper around `MZ()` to build polygon paths.
     If its argument `offset` is nonzero will compute an offset region.
+
+    + `ISOTOXAL_2NGON()` is a wrapper around `POLYGON()` to create isotoxal `2n`-gon polygons (e.g. stars).
+    + `REGULAR_NGON()` is a wrapper around `POLYGON()` to create regular polygons.
+
   + `RECT()` is a wrapper around `MZ()` to build rectangle paths.

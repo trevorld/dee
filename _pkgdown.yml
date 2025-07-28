@@ -6,14 +6,16 @@ template:
   bootstrap: 5
 reference:
     - title: "svg d path commands"
-      desc: ""
+      desc: "Uppercase svg d path commands use absolute coordinates and lowercase commands use relative coordinates.  Lowercase svg d path command functions are all duplicated letters (i.e. `aa()`, `cc()`, etc.) in order to avoid conflicts with base `c()`, `q()`, and `t()`.  Commands ending in a `Z()` or `z()` are convenience funcctions that add a `Z` or `z` to the end of the indicated svg d path command."
       contents:
         - ends_with("Z")
     - title: "svg d path convenience wrappers"
-      desc: ""
+      desc: "These functions are convenience wrappers to help build svg d paths for some shapes of interest.  They all use absolute coordinates."
       contents:
         - BSLASH
         - ELLIPSE
+        - ISOTOXAL_2NGON
+        - REGULAR_NGON
         - POLYGON
         - RECT
     - title: "dee class objects"
