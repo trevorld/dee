@@ -29,6 +29,10 @@ Initial features
 
 * svg d path convenience wrappers:
 
+  + `d_arc1()` `d_arc2()`, `d_arc3()`, `d_arc4()`,
+    `d_arc12()`, `d_arc23()`, `d_arc34()`, `d_arc41()`,
+    `d_arc123()`, `d_arc234()`, `d_arc341()`, and `d_arc412()`
+    are wrappers to create elliptical arc paths.
   + `d_fslash()` and `d_bslash()` are wrappers around `MZ()` to build
     forward/backward slash paths.
   + `d_ellipse()` is a wrapper around `M()` and `AZ()` to build ellipse paths.
