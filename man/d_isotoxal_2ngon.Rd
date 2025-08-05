@@ -60,6 +60,7 @@ A \code{\link[=dee]{dee()}} object.
 \code{d_isotoxal_2ngon()} is a wrapper around \code{d_polygon()}
 to create isotoxal \verb{2n}-gon polygon shaped paths.
 Its vectorized in its \code{x}, \code{y}, \code{r}, \code{s}, \code{n}, \code{a}, and \code{offset} arguments.
+\code{d_star()} is provided as an alias.
 }
 \examples{
 # A |5/2| star e.g. the *verda stelo*

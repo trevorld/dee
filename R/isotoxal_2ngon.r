@@ -3,6 +3,8 @@
 #' `d_isotoxal_2ngon()` is a wrapper around `d_polygon()`
 #' to create isotoxal `2n`-gon polygon shaped paths.
 #' Its vectorized in its `x`, `y`, `r`, `s`, `n`, `a`, and `offset` arguments.
+#' `d_star()` is provided as an alias.
+#'
 #' @inheritParams d_polygon
 #' @inheritParams M
 #' @param r The outer radius of the isotoxal `2n`-gon polygon.

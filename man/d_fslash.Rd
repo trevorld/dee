@@ -47,10 +47,13 @@ d_bslash(
 \item{nib, left, right}{The shape of the "nib" tracing the line.
 This only affects the left and right ends.}
 }
+\value{
+A \code{\link[=dee]{dee()}} object.
+}
 \description{
-\code{d_fslash()} is a wrapper around \code{MZ()} to create
+\code{d_fslash()} is a wrapper around \code{\link[=MZ]{MZ()}} to create
 a forward slash path convenience wrapper.
-\code{d_bslash()} is a wrapper around \code{MZ()} to create
+\code{d_bslash()} is a wrapper around \code{\link[=MZ]{MZ()}} to create
 a backward slash path convenience wrapper.
 They are vectorized in their \code{y_top}, \code{x_right}, \code{y_bottom}, \code{x_left},
 and \code{w} arguments.
@@ -80,4 +83,7 @@ if (requireNamespace("omsvg", quietly = TRUE) &&
   plot(d_d, height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
 }
+}
+\seealso{
+\code{\link[=d_arc1]{d_arc1()}}, \code{\link[=d_arc2]{d_arc2()}}, \code{\link[=d_arc3]{d_arc3()}}, and \code{\link[=d_arc4]{d_arc4()}} for curved (quarter-elliptical arc) lines.
 }

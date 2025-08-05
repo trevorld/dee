@@ -1,17 +1,18 @@
 #' Forward/backward slash path convenience wrapper
 #'
-#' `d_fslash()` is a wrapper around `MZ()` to create
+#' `d_fslash()` is a wrapper around [MZ()] to create
 #' a forward slash path convenience wrapper.
-#' `d_bslash()` is a wrapper around `MZ()` to create
+#' `d_bslash()` is a wrapper around [MZ()] to create
 #' a backward slash path convenience wrapper.
 #' They are vectorized in their `y_top`, `x_right`, `y_bottom`, `x_left`,
-#' and `w` arguments. 
+#' and `w` arguments.
 #' @inheritParams M
 #' @param y_top,x_right,y_bottom,x_left The most extreme x and y values of the slash shape.
 #' @param w The (stroke) width of the slash "line".
 #' @param nib,left,right The shape of the "nib" tracing the line.
 #'                       This only affects the left and right ends.
 #' @param ... Passed to [MZ()].
+#' @return A [dee()] object.
 #' @examples
 #' d_h <- d_fslash(2, 8, 8, 2, 1)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
@@ -37,6 +38,7 @@
 #'   plot(d_d, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
+#' @seealso [d_arc1()], [d_arc2()], [d_arc3()], and [d_arc4()] for curved (quarter-elliptical arc) lines.
 #' @export
 d_fslash <- function(y_top, x_right, y_bottom, x_left, w, ...,
                      origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
@@ -163,7 +165,7 @@ fslash_vs <- function(y_top, x_right, y_bottom, x_left, w, ...) {
     v1 <- v_fslash_vv(x_right - x_left, y_bottom - y_top, 0.5 * w)
     v2 <- v_fslash_vh(x_right - x_left, y_bottom - y_top - v1, 0.5 * w)
     h <- h_fslash_vh(x_right - x_left, y_bottom - y_top - v1, 0.5 * w)
-    x <- c(x_left, x_left, x_right - h, x_right, x_right) 
+    x <- c(x_left, x_left, x_right - h, x_right, x_right)
     y <- c(y_bottom, y_bottom - v1 - v2, y_top, y_top, y_top + v1)
     MZ(x, y, ..., origin_at_bottom = FALSE)
 }
@@ -287,7 +289,7 @@ bslash_hd <- function(y_top, x_right, y_bottom, x_left, w, ...) {
     h1 <- h_fslash_hh(x_right - x_left, y_bottom - y_top, 0.5 * w)
     h2 <- h_fslash_vh(x_right - x_left - h1, y_bottom - y_top, 0.5 * w)
     v <- v_fslash_vh(x_right - x_left - h1, y_bottom - y_top, 0.5 * w)
-    x <- c(x_left, x_left + h1 + h2, x_right, x_right - h1) 
+    x <- c(x_left, x_left + h1 + h2, x_right, x_right - h1)
     y <- c(y_top, y_top, y_bottom - v, y_bottom)
     MZ(x, y, ..., origin_at_bottom = FALSE)
 }
