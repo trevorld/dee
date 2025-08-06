@@ -56,7 +56,7 @@ d_arc1 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left, y_top, ...) +
         A(rx = dx, ry = dy, x = x_right, y = y_bottom, sweep_flag = TRUE) +
         H(x = x_right - w, ...) +
@@ -80,7 +80,7 @@ d_arc2 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left, y_bottom, ...) +
         A(rx = dx, ry = dy, x = x_right, y = y_top, sweep_flag = TRUE) +
         V(y = y_top + w, ...) +
@@ -104,7 +104,7 @@ d_arc3 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left + w, y_top, ...) +
         A(rx = dx - w, ry = dy - w, x = x_right, y = y_bottom - w, ...) +
         V(y = y_bottom) +
@@ -128,7 +128,7 @@ d_arc4 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left, y_bottom - w, ...) +
         A(rx = dx - w, ry = dy - w, x = x_right - w, y = y_top, ...) +
         H(x = x_right, ...) +
@@ -152,7 +152,7 @@ d_arc12 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left, y_bottom, ...) +
         A(rx = dx / 2, ry = dy, x = x_right, y = y_bottom, ..., sweep_flag = TRUE) +
         H(x = x_right - w, ...) +
@@ -176,7 +176,7 @@ d_arc23 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_right, y_bottom, ...) +
         A(rx = dx, ry = dy / 2, x = x_right, y = y_top, ..., sweep_flag = TRUE) +
         V(y = y_top + w, ...) +
@@ -200,7 +200,7 @@ d_arc34 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left + w, y_top, ...) +
         A(rx = dx / 2 - w, ry = dy - w, x = x_right - w, y = y_top, ...) +
         H(x = x_right, ...) +
@@ -224,7 +224,7 @@ d_arc41 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left, y_top, ...) +
         A(rx = dx, ry = dy / 2, x = x_left, y = y_bottom, ..., sweep_flag = TRUE) +
         V(y = y_bottom - w, ...) +
@@ -248,7 +248,7 @@ d_arc123 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left + dx / 2, y_bottom, ...) +
         A(rx = dx / 2, ry = dy / 2, x = x_right, y = y_top + dy / 2, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
         H(x = x_right - w, ...) +
@@ -272,7 +272,7 @@ d_arc234 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_right, y_top + dy / 2, ...) +
         A(rx = dx / 2, ry = dy / 2, x = x_left + dy / 2, y = y_top, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
         V(y = y_top + w, ...) +
@@ -296,7 +296,7 @@ d_arc341 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left + dx / 2, y_top, ...) +
         A(rx = dx / 2, ry = dy / 2, x = x_left, y = y_top + dy / 2, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
         H(x = x_left + w, ...) +
@@ -320,7 +320,7 @@ d_arc412 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     dx <- x_right - x_left
     dy <- y_bottom - y_top
     stopifnot(all(w < dx), all(w < dy))
-    rlang::local_options(origin_at_bottom = FALSE)
+    rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left, y_top + dy / 2, ...) +
         A(rx = dx / 2, ry = dy / 2, x = x_left + dy / 2, y = y_bottom, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
         V(y = y_bottom - w, ...) +
