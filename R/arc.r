@@ -274,7 +274,7 @@ d_arc234 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     stopifnot(all(w < dx), all(w < dy))
     rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_right, y_top + dy / 2, ...) +
-        A(rx = dx / 2, ry = dy / 2, x = x_left + dy / 2, y = y_top, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
+        A(rx = dx / 2, ry = dy / 2, x = x_left + dx / 2, y = y_top, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
         V(y = y_top + w, ...) +
         AZ(rx = dx / 2 - w, ry = dy / 2 - w, x = x_right - w, y = y_top + dy / 2, ..., large_arc_flag = TRUE)
 }
@@ -322,7 +322,7 @@ d_arc412 <- function(y_top, x_right, y_bottom, x_left, w, ...,
     stopifnot(all(w < dx), all(w < dy))
     rlang::local_options(dee.origin_at_bottom = FALSE)
     M(x_left, y_top + dy / 2, ...) +
-        A(rx = dx / 2, ry = dy / 2, x = x_left + dy / 2, y = y_bottom, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
+        A(rx = dx / 2, ry = dy / 2, x = x_left + dx / 2, y = y_bottom, ..., large_arc_flag = TRUE, sweep_flag = TRUE) +
         V(y = y_bottom - w, ...) +
         AZ(rx = dx / 2 - w, ry = dy / 2 - w, x = x_left + w, y = y_top + dy / 2, ..., large_arc_flag = TRUE)
 }
