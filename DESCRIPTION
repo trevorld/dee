@@ -1,7 +1,7 @@
 Package: dee
 Type: Package
 Title: 'd' Attribute Tools
-Version: 0.1.0-17
+Version: 0.1.0-18
 Authors@R: c(person("Trevor L.", "Davis", role=c("aut", "cre"),
              email="trevor.l.davis@gmail.com",
              comment = c(ORCID = "0000-0001-6341-4639")))
@@ -23,5 +23,5 @@ Suggests:
 Remotes: trevorld/affiner, coolbutuseless/svgparser
 License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.3
 Encoding: UTF-8

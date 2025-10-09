@@ -51,28 +51,37 @@
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' @export
-d_isotoxal_2ngon <- function(x, y, r, s, n, a = 90, ...,
-                           offset = 0,
-                           origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-                           height = getOption("dee.height")) {
-    p <- as_coords(x, y)
-    x <- p$x
-    y <- p$y
-    if (isTRUE(origin_at_bottom)) {
-        y <- height - y
-        return (d_isotoxal_2ngon(x, y, r, s, n, a, ...,
-                               offset = offset, origin_at_bottom = FALSE))
-    } 
-    r <- as.numeric(r)
-    s <- as.numeric(s)
-    stopifnot(all(s < r))
-    a <- -as.numeric(degrees(a), "degrees")
-    MoreArgs <- list(...)
-    MoreArgs$origin_at_bottom <- FALSE
-    .mapply(d_isotoxal_2ngon_helper,
-            list(x = x, y = y, r = r, s = s, n = n, a = a, offset = offset),
-            MoreArgs) |>
-        Reduce(`+.dee`, x = _)
+d_isotoxal_2ngon <- function(
+	x,
+	y,
+	r,
+	s,
+	n,
+	a = 90,
+	...,
+	offset = 0,
+	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+	height = getOption("dee.height")
+) {
+	p <- as_coords(x, y)
+	x <- p$x
+	y <- p$y
+	if (isTRUE(origin_at_bottom)) {
+		y <- height - y
+		return(d_isotoxal_2ngon(x, y, r, s, n, a, ..., offset = offset, origin_at_bottom = FALSE))
+	}
+	r <- as.numeric(r)
+	s <- as.numeric(s)
+	stopifnot(all(s < r))
+	a <- -as.numeric(degrees(a), "degrees")
+	MoreArgs <- list(...)
+	MoreArgs$origin_at_bottom <- FALSE
+	.mapply(
+		d_isotoxal_2ngon_helper,
+		list(x = x, y = y, r = r, s = s, n = n, a = a, offset = offset),
+		MoreArgs
+	) |>
+		Reduce(`+.dee`, x = _)
 }
 
 #' @rdname d_isotoxal_2ngon
@@ -80,16 +89,17 @@ d_isotoxal_2ngon <- function(x, y, r, s, n, a = 90, ...,
 d_star <- d_isotoxal_2ngon
 
 d_isotoxal_2ngon_helper <- function(x, y, r, s, n, a, offset, ...) {
-
-    xyo <- as_coord2d(degrees(seq(a, by = 360 / n, length.out = n)),
-                      radius = r)$
-        translate(x = x, y = y)
-    xyi <- as_coord2d(degrees(seq(a + 360 / n / 2, by = 360 / n, length.out = n)),
-                      radius = s * r)$
-        translate(x = x, y = y)
-    x <- as.numeric(rbind(xyo$x, xyi$x))
-    y <- as.numeric(rbind(xyo$y, xyi$y))
-    d_polygon(x, y, ..., offset = offset)
+	xyo <- as_coord2d(degrees(seq(a, by = 360 / n, length.out = n)), radius = r)$translate(
+		x = x,
+		y = y
+	)
+	xyi <- as_coord2d(
+		degrees(seq(a + 360 / n / 2, by = 360 / n, length.out = n)),
+		radius = s * r
+	)$translate(x = x, y = y)
+	x <- as.numeric(rbind(xyo$x, xyi$x))
+	y <- as.numeric(rbind(xyo$y, xyi$y))
+	d_polygon(x, y, ..., offset = offset)
 }
 
 #' Regular `n`-gon path convenience wrapper
@@ -122,32 +132,40 @@ d_isotoxal_2ngon_helper <- function(x, y, r, s, n, a, offset, ...) {
 #'        fill = "magenta", stroke = "black", stroke_width = 4)
 #' }
 #' @export
-d_regular_ngon <- function(x, y, r, n, a = 90, ...,
-                         offset = 0,
-                         origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
-                         height = getOption("dee.height")) {
-    p <- as_coords(x, y)
-    x <- p$x
-    y <- p$y
-    if (isTRUE(origin_at_bottom)) {
-        y <- height - y
-        return (d_regular_ngon(x, y, r, n, a, ...,
-                             offset = offset, origin_at_bottom = FALSE))
-    } 
-    r <- as.numeric(r)
-    a <- -as.numeric(degrees(a), "degrees")
-    MoreArgs <- list(...)
-    MoreArgs$origin_at_bottom <- FALSE
-    .mapply(d_regular_ngon_helper,
-            list(x = x, y = y, r = r, n = n, a = a, offset = offset),
-            MoreArgs) |>
-        Reduce(`+.dee`, x = _)
+d_regular_ngon <- function(
+	x,
+	y,
+	r,
+	n,
+	a = 90,
+	...,
+	offset = 0,
+	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+	height = getOption("dee.height")
+) {
+	p <- as_coords(x, y)
+	x <- p$x
+	y <- p$y
+	if (isTRUE(origin_at_bottom)) {
+		y <- height - y
+		return(d_regular_ngon(x, y, r, n, a, ..., offset = offset, origin_at_bottom = FALSE))
+	}
+	r <- as.numeric(r)
+	a <- -as.numeric(degrees(a), "degrees")
+	MoreArgs <- list(...)
+	MoreArgs$origin_at_bottom <- FALSE
+	.mapply(
+		d_regular_ngon_helper,
+		list(x = x, y = y, r = r, n = n, a = a, offset = offset),
+		MoreArgs
+	) |>
+		Reduce(`+.dee`, x = _)
 }
 
 d_regular_ngon_helper <- function(x, y, r, n, a, offset, ...) {
-
-    xy <- as_coord2d(degrees(seq(a, by = 360 / n, length.out = n)),
-                     radius = r)$
-        translate(x = x, y = y)
-    d_polygon(xy$x, xy$y, ..., offset = offset)
+	xy <- as_coord2d(degrees(seq(a, by = 360 / n, length.out = n)), radius = r)$translate(
+		x = x,
+		y = y
+	)
+	d_polygon(xy$x, xy$y, ..., offset = offset)
 }
