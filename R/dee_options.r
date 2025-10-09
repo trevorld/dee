@@ -1,6 +1,4 @@
-default_options <- list(dee.sep = ",",
-                        dee.origin_at_bottom = FALSE,
-                        dee.height = NULL)
+default_options <- list(dee.sep = ",", dee.origin_at_bottom = FALSE, dee.height = NULL)
 
 #' Get dee options
 #'
@@ -20,28 +18,30 @@ default_options <- list(dee.sep = ",",
 #'   dee_options(dee.height = 100, dee.width = 100, dee.origin_at_bottom = TRUE)
 #' @seealso [dee-package] for a high-level description of relevant global options.
 #' @export
-dee_options <- function (..., default = FALSE) {
-    dee_op <- list(dee.attrs = NULL,
-                   dee.background_color = NULL,
-                   dee.digits = Inf,
-                   dee.fill = NULL,
-                   dee.height = NULL,
-                   dee.origin_at_bottom = FALSE,
-                   dee.sep = ",",
-                   dee.stroke = NULL,
-                   dee.stroke_width = NULL,
-                   dee.width = NULL)
-    l <- list(...)
-    stopifnot(all(names(l) %in% names(dee_op)))
-    if (isFALSE(default)) {
-        for (n in names(dee_op)) {
-            dee_op[n] <- list(getOption(n, dee_op[[n]]))
-        }
-    }
-    if (length(names(l))) {
-        for (n in names(l)) {
-            dee_op[n] <- l[n]
-        }
-    }
-    dee_op
+dee_options <- function(..., default = FALSE) {
+	dee_op <- list(
+		dee.attrs = NULL,
+		dee.background_color = NULL,
+		dee.digits = Inf,
+		dee.fill = NULL,
+		dee.height = NULL,
+		dee.origin_at_bottom = FALSE,
+		dee.sep = ",",
+		dee.stroke = NULL,
+		dee.stroke_width = NULL,
+		dee.width = NULL
+	)
+	l <- list(...)
+	stopifnot(all(names(l) %in% names(dee_op)))
+	if (isFALSE(default)) {
+		for (n in names(dee_op)) {
+			dee_op[n] <- list(getOption(n, dee_op[[n]]))
+		}
+	}
+	if (length(names(l))) {
+		for (n in names(l)) {
+			dee_op[n] <- l[n]
+		}
+	}
+	dee_op
 }

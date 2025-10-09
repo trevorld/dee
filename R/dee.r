@@ -7,35 +7,35 @@
 #' @examples dee("M 10,30") + dee("V 30")
 #' @export
 dee <- function(x) {
-    x <- as.character(x)
-    class(x) <- c("dee", "character")
-    x
+	x <- as.character(x)
+	class(x) <- c("dee", "character")
+	x
 }
 
 #' @export
 `+.dee` <- function(e1, e2) {
-    dee(paste(e1, e2))
+	dee(paste(e1, e2))
 }
 
 #' @export
 c.dee <- function(...) {
-    dee(NextMethod())
+	dee(NextMethod())
 }
 
 #' @export
 format.dee <- function(x, ...) {
-    x <- as.character(x)
-    x <- gsub("([Z|z] )", "\\1\n", x)
-    x
+	x <- as.character(x)
+	x <- gsub("([Z|z] )", "\\1\n", x)
+	x
 }
 
 #' @export
 print.dee <- function(x, ...) {
-    check_dots_empty()
-    s <- format.dee(x, ...) |> paste(collapse = "\n")
-    header <- paste0("<dee[", length(x), "]>\n")
-    cat(header, s, "\n", sep = "")
-    invisible(x)
+	check_dots_empty()
+	s <- format.dee(x, ...) |> paste(collapse = "\n")
+	header <- paste0("<dee[", length(x), "]>\n")
+	cat(header, s, "\n", sep = "")
+	invisible(x)
 }
 
 #' Plot an object of class "dee"
@@ -62,31 +62,34 @@ print.dee <- function(x, ...) {
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' @export
-plot.dee <- function(x, ...,
-                     height = getOption("dee.height"),
-                     width = getOption("dee.width"),
-                     background_color = getOption("dee.background_color", "none"),
-                     stroke = getOption("dee.stroke"),
-                     stroke_width = getOption("dee.stroke_width"),
-                     fill = getOption("dee.fill"),
-                     attrs = getOption("dee.attrs")) {
-    stopifnot(is.numeric(height), 
-              is.numeric(width),
-              requireNamespace("omsvg", quietly = TRUE),
-              requireNamespace("svgparser", quietly = TRUE))
-    bg <- MZ(x = c(0, 0, width, width),
-             y = c(0, height, height, 0))
-    svg <- omsvg::SVG(width = width, height = height, viewbox = TRUE) |>
-            omsvg::svg_path(bg, fill = background_color, stroke = "none")
-    for (d in x) {
-        svg <- svg |> omsvg::svg_path(d,
-            stroke = stroke, stroke_width,
-            fill = fill, attrs = attrs, ...)
-    }
-    g <- as.character(svg) |>
-        paste(collapse = "\n") |>
-        svgparser::read_svg()
-    grid::grid.newpage()
-    grid::grid.draw(g)
-    invisible(NULL)
+plot.dee <- function(
+	x,
+	...,
+	height = getOption("dee.height"),
+	width = getOption("dee.width"),
+	background_color = getOption("dee.background_color", "none"),
+	stroke = getOption("dee.stroke"),
+	stroke_width = getOption("dee.stroke_width"),
+	fill = getOption("dee.fill"),
+	attrs = getOption("dee.attrs")
+) {
+	stopifnot(
+		is.numeric(height),
+		is.numeric(width),
+		requireNamespace("omsvg", quietly = TRUE),
+		requireNamespace("svgparser", quietly = TRUE)
+	)
+	bg <- MZ(x = c(0, 0, width, width), y = c(0, height, height, 0))
+	svg <- omsvg::SVG(width = width, height = height, viewbox = TRUE) |>
+		omsvg::svg_path(bg, fill = background_color, stroke = "none")
+	for (d in x) {
+		svg <- svg |>
+			omsvg::svg_path(d, stroke = stroke, stroke_width, fill = fill, attrs = attrs, ...)
+	}
+	g <- as.character(svg) |>
+		paste(collapse = "\n") |>
+		svgparser::read_svg()
+	grid::grid.newpage()
+	grid::grid.draw(g)
+	invisible(NULL)
 }

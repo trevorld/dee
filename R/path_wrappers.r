@@ -17,21 +17,21 @@
 #' }
 #' @export
 d_rect <- function(x, y = NULL, w, h, ...) {
-    p <- as_coords(x, y)
-    x <- p$x
-    y <- p$y
-    .mapply(d_rect_helper, list(x = x, y = y, w = w, h = h), list(...)) |>
-        Reduce(`+.dee`, x = _)
+	p <- as_coords(x, y)
+	x <- p$x
+	y <- p$y
+	.mapply(d_rect_helper, list(x = x, y = y, w = w, h = h), list(...)) |>
+		Reduce(`+.dee`, x = _)
 }
 
 d_rect_helper <- function(x, y, w, h, ...) {
-    xl <- x - 0.5 * w
-    xr <- x + 0.5 * w
-    yb <- y - 0.5 * h
-    yt <- y + 0.5 * h
-    x <- c(xl, xl, xr, xr)
-    y <- c(yb, yt, yt, yb)
-    MZ(x, y, ...)
+	xl <- x - 0.5 * w
+	xr <- x + 0.5 * w
+	yb <- y - 0.5 * h
+	yt <- y + 0.5 * h
+	x <- c(xl, xl, xr, xr)
+	y <- c(yb, yt, yt, yb)
+	MZ(x, y, ...)
 }
 
 #' Ellipse path convenience wrapper
@@ -57,24 +57,22 @@ d_rect_helper <- function(x, y, w, h, ...) {
 #' }
 #' @export
 d_ellipse <- function(x, y = NULL, rx, ry = rx, ...) {
-    p <- as_coords(x, y)
-    x <- p$x
-    y <- p$y
-    .mapply(d_ellipse_helper,
-            list(x = x, y = y, rx = rx, ry = ry),
-            list(...)) |>
-        Reduce(`+.dee`, x = _)
+	p <- as_coords(x, y)
+	x <- p$x
+	y <- p$y
+	.mapply(d_ellipse_helper, list(x = x, y = y, rx = rx, ry = ry), list(...)) |>
+		Reduce(`+.dee`, x = _)
 }
 
 #' @rdname d_ellipse
 #' @export
 d_circle <- function(x, y = NULL, r, ...) {
-    d_ellipse(x, y, r, r, ...)
+	d_ellipse(x, y, r, r, ...)
 }
 
 d_ellipse_helper <- function(x, y, rx, ry, ...) {
-    M(x, y + ry, ...) +
-        AZ(rx, ry, 0, 0, 0, x, c(y - ry, y + ry), ...)
+	M(x, y + ry, ...) +
+		AZ(rx, ry, 0, 0, 0, x, c(y - ry, y + ry), ...)
 }
 
 #' Polygon path convenience wrapper
@@ -103,26 +101,38 @@ d_ellipse_helper <- function(x, y, rx, ry, ...) {
 #' }
 #' @seealso [polyclip::polyoffset()] for details on computing the offset region when `offset` is non-zero.
 #' @export
-d_polygon <- function(x, y = NULL, ...,
-                    offset = 0,
-                    linejoin = c("miter", "round"),
-                    miterlimit = 4) {
-    if (length(offset) == 1L && offset == 0)
-        return (MZ(x, y, ...))
-    stopifnot(requireNamespace("polyclip", quietly = TRUE))
-    p <- as_coords(x, y)
-    x <- p$x
-    y <- p$y
-    jointype <- match.arg(linejoin)
-    lapply(offset, d_polygon_helper, ..., x = x, y = y, jointype = jointype, miterlim = miterlimit) |>
-        Reduce(`+.dee`, x = _)
+d_polygon <- function(
+	x,
+	y = NULL,
+	...,
+	offset = 0,
+	linejoin = c("miter", "round"),
+	miterlimit = 4
+) {
+	if (length(offset) == 1L && offset == 0) {
+		return(MZ(x, y, ...))
+	}
+	stopifnot(requireNamespace("polyclip", quietly = TRUE))
+	p <- as_coords(x, y)
+	x <- p$x
+	y <- p$y
+	jointype <- match.arg(linejoin)
+	lapply(
+		offset,
+		d_polygon_helper,
+		...,
+		x = x,
+		y = y,
+		jointype = jointype,
+		miterlim = miterlimit
+	) |>
+		Reduce(`+.dee`, x = _)
 }
 
 d_polygon_helper <- function(offset, ..., x, y, jointype, miterlim) {
-    xy <- polyclip::polyoffset(list(x = x, y = y), offset,
-                               jointype = jointype, miterlim = miterlim)
-    if (length(xy) == 0L) {
-        rlang::abort(paste0("`polyoffset()` did not return a polygon for `offset =`", offset, "`"))
-    }
-    MZ(xy, ...)
+	xy <- polyclip::polyoffset(list(x = x, y = y), offset, jointype = jointype, miterlim = miterlim)
+	if (length(xy) == 0L) {
+		rlang::abort(paste0("`polyoffset()` did not return a polygon for `offset =`", offset, "`"))
+	}
+	MZ(xy, ...)
 }
