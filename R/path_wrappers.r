@@ -1,11 +1,11 @@
 #' Rectangle path convenience wrapper
 #'
-#' `d_rect()` is a wrapper around `MZ()` to create
+#' `d_rect()` is a wrapper around `d_polygon()` to create
 #' rectangle shaped paths.
 #' It's vectorized in its `x`, `y`, `w`, and `h` arguments.
 #' @inheritParams M
 #' @param w,h The width and height of the rectangle.
-#' @param ... Passed to [MZ()].
+#' @param ... Passed to [d_polygon()].
 #' @return A [dee()] object.
 #' @examples
 #' d_rect(x = 5, y = 5, w = 4, h = 6)
@@ -31,7 +31,7 @@ d_rect_helper <- function(x, y, w, h, ...) {
 	yt <- y + 0.5 * h
 	x <- c(xl, xl, xr, xr)
 	y <- c(yb, yt, yt, yb)
-	MZ(x, y, ...)
+	d_polygon(x, y, ...)
 }
 
 #' Ellipse path convenience wrapper
