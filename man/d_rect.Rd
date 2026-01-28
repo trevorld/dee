@@ -4,7 +4,16 @@
 \alias{d_rect}
 \title{Rectangle path convenience wrapper}
 \usage{
-d_rect(x, y = NULL, w, h, ...)
+d_rect(
+  x,
+  y = NULL,
+  w,
+  h,
+  a = 0,
+  ...,
+  origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+  height = getOption("dee.height")
+)
 }
 \arguments{
 \item{x}{If \code{y} is \code{NULL} will be coerced by \code{\link[affiner:as_coord2d]{affiner::as_coord2d()}}.
@@ -14,7 +23,13 @@ Else a numeric vector.}
 
 \item{w, h}{The width and height of the rectangle.}
 
+\item{a}{The angle of rotation (will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}).}
+
 \item{...}{Passed to \code{\link[=d_polygon]{d_polygon()}}.}
+
+\item{origin_at_bottom, height}{If \code{origin_at_bottom} is \code{TRUE} then
+\code{y} (and any \code{y1} and \code{y2}) coordinates is transformed by
+\code{height - y} for absolute coordinates and \code{-y} for relative coordinates.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.
