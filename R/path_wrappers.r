@@ -5,6 +5,7 @@
 #' It's vectorized in its `x`, `y`, `w`, and `h` arguments.
 #' @inheritParams M
 #' @param w,h The width and height of the rectangle.
+#' @param a The angle of rotation (will be coerced by [affiner::degrees()]).
 #' @param ... Passed to [d_polygon()].
 #' @return A [dee()] object.
 #' @examples
@@ -16,22 +17,39 @@
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' @export
-d_rect <- function(x, y = NULL, w, h, ...) {
+d_rect <- function(
+	x,
+	y = NULL,
+	w,
+	h,
+	a = 0,
+	...,
+	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+	height = getOption("dee.height")
+) {
 	p <- as_coords(x, y)
 	x <- p$x
 	y <- p$y
-	.mapply(d_rect_helper, list(x = x, y = y, w = w, h = h), list(...)) |>
+	if (isTRUE(origin_at_bottom)) {
+		y <- height - y
+		return(d_rect(x, y, w, h, a, ..., origin_at_bottom = FALSE))
+	}
+	a <- -as.numeric(degrees(a), "degrees")
+	MoreArgs <- list(...)
+	MoreArgs$origin_at_bottom <- FALSE
+	.mapply(d_rect_helper, list(x = x, y = y, w = w, h = h, a = a), MoreArgs) |>
 		Reduce(`+.dee`, x = _)
 }
 
-d_rect_helper <- function(x, y, w, h, ...) {
-	xl <- x - 0.5 * w
-	xr <- x + 0.5 * w
-	yb <- y - 0.5 * h
-	yt <- y + 0.5 * h
-	x <- c(xl, xl, xr, xr)
-	y <- c(yb, yt, yt, yb)
-	d_polygon(x, y, ...)
+d_rect_helper <- function(x, y, w, h, a, ...) {
+	xl <- -0.5 * w
+	xr <- +0.5 * w
+	yb <- -0.5 * h
+	yt <- +0.5 * h
+	xs <- c(xl, xl, xr, xr)
+	ys <- c(yb, yt, yt, yb)
+	xy <- as_coord2d(xs, ys)$rotate(degrees(a))$translate(x, y)
+	d_polygon(xy, ...)
 }
 
 #' Ellipse path convenience wrapper
@@ -75,7 +93,9 @@ d_ellipse <- function(
 		return(d_ellipse(x, y, rx, ry, a, ..., origin_at_bottom = FALSE))
 	}
 	a <- -as.numeric(degrees(a), "degrees")
-	.mapply(d_ellipse_helper, list(x = x, y = y, rx = rx, ry = ry, a = a), list(...)) |>
+	MoreArgs <- list(...)
+	MoreArgs$origin_at_bottom <- FALSE
+	.mapply(d_ellipse_helper, list(x = x, y = y, rx = rx, ry = ry, a = a), MoreArgs) |>
 		Reduce(`+.dee`, x = _)
 }
 
