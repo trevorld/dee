@@ -14,13 +14,13 @@ Else a numeric vector.}
 
 \item{w, h}{The width and height of the rectangle.}
 
-\item{...}{Passed to \code{\link[=MZ]{MZ()}}.}
+\item{...}{Passed to \code{\link[=d_polygon]{d_polygon()}}.}
 }
 \value{
 A \code{\link[=dee]{dee()}} object.
 }
 \description{
-\code{d_rect()} is a wrapper around \code{MZ()} to create
+\code{d_rect()} is a wrapper around \code{d_polygon()} to create
 rectangle shaped paths.
 It's vectorized in its \code{x}, \code{y}, \code{w}, and \code{h} arguments.
 }
