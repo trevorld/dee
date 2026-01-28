@@ -40,3 +40,9 @@ test_that("`d_rect()`", {
 	rlang::local_options(dee.origin_at_bottom = TRUE, dee.height = 10)
 	expect_equal(d_rect(5, 5, 4, 2, a = 90) |> format(), "M 4,7 6,7 6,3 4,3 Z")
 })
+
+test_that("`d_aabb()`", {
+	do.call(rlang::local_options, dee_options(default = TRUE))
+	expect_equal(d_aabb(x = c(7, 13), y = c(8, 12)) |> format(), "M 7,8 7,12 13,12 13,8 Z")
+	expect_equal(d_aabb(x = as_coord2d(c(7, 13), c(8, 12))) |> format(), "M 7,8 7,12 13,12 13,8 Z")
+})

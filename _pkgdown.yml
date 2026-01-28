@@ -12,6 +12,7 @@ reference:
     - title: "svg d path convenience wrappers"
       desc: "These functions are convenience wrappers to help build svg d paths for some shapes of interest.  They all use absolute coordinates."
       contents:
+        - d_aabb
         - d_arc1
         - d_bslash
         - d_ellipse
