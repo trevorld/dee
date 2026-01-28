@@ -5,6 +5,11 @@ test_that("`d_ellipse()`", {
 	expect_true(d_ellipse(5, 5, 2, 3) |> inherits("dee"))
 	# plot(d_ellipse(5, 5, 2, 3), height = 10, width = 10, fill = "red")
 	# plot(d_ellipse(5, 5, 3, 2), height = 10, width = 10, fill = "red")
+	expect_true(d_ellipse(5, 5, 2, 3, a = 45) |> inherits("dee"))
+	# plot(d_ellipse(5, 5, 3, 2, a = 45), height = 10, width = 10, fill = "red")
+
+	rlang::local_options(dee.origin_at_bottom = TRUE, dee.height = 10)
+	expect_true(d_ellipse(5, 5, 2, 3, a = 45) |> inherits("dee"))
 })
 
 test_that("`d_polygon()`", {
