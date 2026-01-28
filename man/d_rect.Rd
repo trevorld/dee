@@ -48,3 +48,6 @@ if (requireNamespace("omsvg", quietly = TRUE) &&
        fill = "red", stroke = "black", stroke_width = 4)
 }
 }
+\seealso{
+\code{\link[=d_aabb]{d_aabb()}}, \code{\link[=d_polygon]{d_polygon()}}
+}

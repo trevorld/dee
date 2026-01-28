@@ -1,3 +1,38 @@
+#' Axis-aligned bounding box convenience wrapper
+#'
+#' `d_aabb()` is a wrapper around `d_rect()` to create
+#' an axis-aligned bounding box path.
+#' @inheritParams M
+#' @param ... Passed to [d_polygon()].
+#' @return A [dee()] object.
+#' @seealso [d_rect()], [d_polygon()]
+#' @examples
+#' d_aabb(x = 2:6, y = 4:8)
+#' if (requireNamespace("omsvg", quietly = TRUE) &&
+#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'   plot(d_aabb(x = 2:6, y = 4:8),
+#'        height = 10, width = 10,
+#'        fill = "red", stroke = "black", stroke_width = 4)
+#' }
+#' @export
+d_aabb <- function(
+	x,
+	y = NULL,
+	...
+) {
+	if (is.null(y)) {
+		p <- range(as_coord2d(x))
+	} else {
+		stopifnot(is.numeric(x), is.numeric(y))
+		p <- data.frame(x = range(x), y = range(y))
+	}
+	x <- mean(p$x)
+	y <- mean(p$y)
+	w <- diff(p$x)
+	h <- diff(p$y)
+	d_rect(x, y, w, h, ...)
+}
+
 #' Rectangle path convenience wrapper
 #'
 #' `d_rect()` is a wrapper around `d_polygon()` to create
@@ -8,6 +43,7 @@
 #' @param a The angle of rotation (will be coerced by [affiner::degrees()]).
 #' @param ... Passed to [d_polygon()].
 #' @return A [dee()] object.
+#' @seealso [d_aabb()], [d_polygon()]
 #' @examples
 #' d_rect(x = 5, y = 5, w = 4, h = 6)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
