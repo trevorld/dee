@@ -44,6 +44,7 @@ d_rect_helper <- function(x, y, w, h, ...) {
 #' @inheritParams M
 #' @param r The radius of the circle.
 #' @param rx,ry The radii of the ellipse.
+#' @param a The angle of rotation (will be coerced by [affiner::degrees()]).
 #' @param ... Passed to [M()] and [AZ()].
 #' @return A [dee()] object.
 #' @examples
@@ -56,11 +57,25 @@ d_rect_helper <- function(x, y, w, h, ...) {
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' @export
-d_ellipse <- function(x, y = NULL, rx, ry = rx, ...) {
+d_ellipse <- function(
+	x,
+	y = NULL,
+	rx,
+	ry = rx,
+	a = 0,
+	...,
+	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+	height = getOption("dee.height")
+) {
 	p <- as_coords(x, y)
 	x <- p$x
 	y <- p$y
-	.mapply(d_ellipse_helper, list(x = x, y = y, rx = rx, ry = ry), list(...)) |>
+	if (isTRUE(origin_at_bottom)) {
+		y <- height - y
+		return(d_ellipse(x, y, rx, ry, a, ..., origin_at_bottom = FALSE))
+	}
+	a <- -as.numeric(degrees(a), "degrees")
+	.mapply(d_ellipse_helper, list(x = x, y = y, rx = rx, ry = ry, a = a), list(...)) |>
 		Reduce(`+.dee`, x = _)
 }
 
@@ -70,9 +85,11 @@ d_circle <- function(x, y = NULL, r, ...) {
 	d_ellipse(x, y, r, r, ...)
 }
 
-d_ellipse_helper <- function(x, y, rx, ry, ...) {
-	M(x, y + ry, ...) +
-		AZ(rx, ry, 0, 0, 0, x, c(y - ry, y + ry), ...)
+d_ellipse_helper <- function(x, y, rx, ry, a, ...) {
+	xy0 <- as_coord2d(degrees(a + 90), radius = ry)$translate(x, y)
+	xy1 <- as_coord2d(degrees(a + 270), radius = ry)$translate(x, y)
+	M(xy0$x, xy0$y, ...) +
+		AZ(rx, ry, a, 0, 0, c(xy1$x, xy0$x), c(xy1$y, xy0$y), ...)
 }
 
 #' Polygon path convenience wrapper
