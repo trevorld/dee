@@ -1,7 +1,7 @@
 Package: dee
 Type: Package
 Title: 'd' Attribute Tools
-Version: 0.1.0-19
+Version: 0.1.0-20
 Authors@R: c(person("Trevor L.", "Davis", role=c("aut", "cre"),
              email="trevor.l.davis@gmail.com",
              comment = c(ORCID = "0000-0001-6341-4639")))
@@ -11,16 +11,17 @@ Description: Utilities to build an svg path 'd' <https://developer.mozilla.org/e
 Depends:
     R (>= 4.2)
 Imports:
-    affiner (>= 0.2.0),
-    grid,
-    rlang
+	affiner (>= 0.2.0),
+	grid,
+	rlang,
+	utils
 Suggests:
-    grDevices,
-    omsvg,
-    polyclip,
-    svgparser,
-    testthat
-Remotes: trevorld/affiner, coolbutuseless/svgparser
+	grDevices,
+	omsvg,
+	polyclip,
+	svgparser,
+	testthat
+Additional_repositories: https://trevorld.r-universe.dev
 License: MIT + file LICENSE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3

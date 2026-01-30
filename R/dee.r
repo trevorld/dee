@@ -40,13 +40,15 @@ print.dee <- function(x, ...) {
 
 #' Plot an object of class "dee"
 #'
-#' `plot()` an object of class "dee" using `omgsvg::SVG()`, `omsvg::svg_path()` and `svgparser::read_svg()`.
+#' `plot()` an object of class "dee" using `omgsvg::SVG()`, `omsvg::svg_path()`, and `svgparser::read_svg()`.
+#'
+#' This function requires the package `svgparser` which (as of January 2026) is not available on CRAN.  You can install it with `remotes::install_github('coolbutuseless/svgparser')` or `utils::install.packages('svgparser', repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org'))`.
+#'
 #' @param x An object of class "x".
 #' @param ... Passed to [omsvg::svg_path()].
 #' @param height,width svg width and height.
 #' @param background_color Background color.
 #' @param stroke,stroke_width,fill,attrs Passed to [omsvg::svg_path()].
-#'
 #' @return `invisible(NULL)`
 # # https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d#example
 #' @examples
@@ -75,10 +77,15 @@ plot.dee <- function(
 ) {
 	stopifnot(
 		is.numeric(height),
-		is.numeric(width),
-		requireNamespace("omsvg", quietly = TRUE),
-		requireNamespace("svgparser", quietly = TRUE)
+		is.numeric(width)
 	)
+	rlang::check_installed("omsvg")
+	rlang::check_installed("svgparser", action = function(...) {
+		utils::install.packages(
+			'svgparser',
+			repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org')
+		)
+	})
 	bg <- MZ(x = c(0, 0, width, width), y = c(0, height, height, 0))
 	svg <- omsvg::SVG(width = width, height = height, viewbox = TRUE) |>
 		omsvg::svg_path(bg, fill = background_color, stroke = "none")
