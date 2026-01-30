@@ -179,6 +179,7 @@ SVG(width = 100, height = 100, viewbox = TRUE) |>
 The `d` attribute of svg paths:
 
 * [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d)
+* [NaN's *Understanding SVG Paths*](https://www.nan.fyi/svg-paths)
 * [w3.org SVG 1.1 specification](https://www.w3.org/TR/2011/REC-SVG11-20110816/paths.html#PathData)
 
 R packages:

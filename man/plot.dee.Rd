@@ -31,7 +31,10 @@
 \code{invisible(NULL)}
 }
 \description{
-\code{plot()} an object of class "dee" using \code{omgsvg::SVG()}, \code{omsvg::svg_path()} and \code{svgparser::read_svg()}.
+\code{plot()} an object of class "dee" using \code{omgsvg::SVG()}, \code{omsvg::svg_path()}, and \code{svgparser::read_svg()}.
+}
+\details{
+This function requires the package \code{svgparser} which (as of January 2026) is not available on CRAN.  You can install it with \code{remotes::install_github('coolbutuseless/svgparser')} or \code{utils::install.packages('svgparser', repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org'))}.
 }
 \examples{
 d <- M(10, 30) +
