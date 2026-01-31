@@ -16,5 +16,6 @@ An object of class "dee".
 \code{dee()} casts a string to an object of class "dee".
 }
 \examples{
-dee("M 10,30") + dee("V 30")
+d <- dee("M 10,30") + dee("V 30")
+c(d, d)
 }

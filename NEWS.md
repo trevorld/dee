@@ -7,6 +7,7 @@ Initial features
 * `dee()` creates "dee" class objects.
 
   + Can be plotted with `plot.dee()` if suggested packages `{omsvg}` and `{svgparser}` are installed.
+  + Can be converted to an `{omsvg}` "svg" class object with `as_omsvg()` if suggested package `{omsvg}` is installed.
 
 * `dee_options()` returns a list of (current or default) `{dee}` package option values.
 * Absolute coordinate svg d path command helpers:
