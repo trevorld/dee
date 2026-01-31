@@ -10,16 +10,19 @@
 A(
   rx,
   ry = rx,
-  x_axis_rotation = 0,
-  large_arc_flag = FALSE,
-  sweep_flag = FALSE,
+  x_axis_rotation = -a,
+  large_arc_flag = big,
+  sweep_flag = cw,
   x,
   y = NULL,
   ...,
   sep = getOption("dee.sep", ","),
   origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
   height = getOption("dee.height", NULL),
-  digits = getOption("dee.digits", Inf)
+  digits = getOption("dee.digits", Inf),
+  a = 0,
+  cw = FALSE,
+  big = FALSE
 )
 
 aa(
@@ -44,16 +47,18 @@ az(...)
 \arguments{
 \item{rx, ry}{Radius of ellipse.}
 
-\item{x_axis_rotation}{Angle (in degrees) from x-axis of ellipse.
+\item{x_axis_rotation, a}{Angle (in degrees) to rotate ellipse clockwise.
 Will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}.
-If \code{isTRUE(origin_at_bottom)} will multiply by \code{-1}.}
+If \code{isTRUE(origin_at_bottom)} then will be multiplied by \code{-1} in the output.
+\code{a} is an alternative that instead rotates the ellipse counter-clockwise.}
 
-\item{large_arc_flag}{If \code{TRUE} then one of two larger arc sweeps chosen else
-one of the two smaller arc sweeps.}
+\item{large_arc_flag, big}{If \code{TRUE} then the arc will be one of two larger arc sweeps
+else one of the two smaller arc sweeps. \code{big} is an alias.}
 
-\item{sweep_flag}{If \code{TRUE} then arc will be drawn in "positive-angle" direction.
-else drawn in "negative-angle" direction.
-If \code{isTRUE(origin_at_bottom)} will invert.}
+\item{sweep_flag, cw}{If \code{TRUE} then the arc will be one of the two possible arcs in the "clockwise" direction.
+else one of the two in a "counter-clockwise" direction.
+If \code{isTRUE(origin_at_bottom)} then will be inverted in the output.
+\code{cw} is an alias.}
 
 \item{x}{If \code{y} is \code{NULL} will be coerced by \code{\link[affiner:as_coord2d]{affiner::as_coord2d()}}.
 Else a numeric vector.}
@@ -80,10 +85,15 @@ A \code{\link[=dee]{dee()}} object.
 \examples{
 M(1, 1) + A(rx = 1, x = 2, y = 2) + Z()
 M(1, 1) + aa(rx = 1, x = 1, y = 1) + zz()
-e <- M(5, 8) + AZ(2, 3, x = 5, y = c(2, 8))
+d_small_ccw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20)
+d_small_cw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, cw = TRUE)
+d_big_ccw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE)
+d_big_cw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE, cw = TRUE)
 if (requireNamespace("omsvg", quietly = TRUE) &&
     requireNamespace("svgparser", quietly = TRUE)) {
-  plot(e, height = 10, width = 10,
-       fill = "red", stroke = "black", stroke_width = 4)
+  plot(c(d_small_ccw, d_small_cw, d_big_ccw, d_big_cw),
+    height = 100, width = 100,
+    stroke = c("black", "grey", "blue", "cyan"),
+    fill = "none", stroke_width = 4)
 }
 }
