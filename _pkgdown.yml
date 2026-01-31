@@ -23,6 +23,7 @@ reference:
     - title: "dee class objects"
       desc: ""
       contents:
+        - as_omsvg
         - ends_with("dee")
     - title: "Package options"
       desc: ""
