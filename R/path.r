@@ -590,38 +590,48 @@ sz <- function(...) {
 #'
 #' @inheritParams M
 #' @param rx,ry Radius of ellipse.
-#' @param x_axis_rotation Angle (in degrees) from x-axis of ellipse.
-#'                        Will be coerced by [affiner::degrees()].
-#'                        If `isTRUE(origin_at_bottom)` will multiply by `-1`.
-#' @param large_arc_flag If `TRUE` then one of two larger arc sweeps chosen else
-#'                       one of the two smaller arc sweeps.
-#' @param sweep_flag If `TRUE` then arc will be drawn in "positive-angle" direction.
-#'                   else drawn in "negative-angle" direction.
-#'                   If `isTRUE(origin_at_bottom)` will invert.
+#' @param x_axis_rotation,a Angle (in degrees) to rotate ellipse clockwise.
+#'            Will be coerced by [affiner::degrees()].
+#'            If `isTRUE(origin_at_bottom)` then will be multiplied by `-1` in the output.
+#'            `a` is an alternative that instead rotates the ellipse counter-clockwise.
+#' @param large_arc_flag,big If `TRUE` then the arc will be one of two larger arc sweeps
+#'            else one of the two smaller arc sweeps. `big` is an alias.
+#' @param sweep_flag,cw If `TRUE` then the arc will be one of the two possible arcs in the "clockwise" direction.
+#'            else one of the two in a "counter-clockwise" direction.
+#'            If `isTRUE(origin_at_bottom)` then will be inverted in the output.
+#'            `cw` is an alias.
 #' @return A [dee()] object.
 #' @examples
 #' M(1, 1) + A(rx = 1, x = 2, y = 2) + Z()
 #' M(1, 1) + aa(rx = 1, x = 1, y = 1) + zz()
-#' e <- M(5, 8) + AZ(2, 3, x = 5, y = c(2, 8))
+#' d_small_ccw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20)
+#' d_small_cw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, cw = TRUE)
+#' d_big_ccw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE)
+#' d_big_cw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE, cw = TRUE)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
 #'     requireNamespace("svgparser", quietly = TRUE)) {
-#'   plot(e, height = 10, width = 10,
-#'        fill = "red", stroke = "black", stroke_width = 4)
+#'   plot(c(d_small_ccw, d_small_cw, d_big_ccw, d_big_cw),
+#'     height = 100, width = 100,
+#'     stroke = c("black", "grey", "blue", "cyan"),
+#'     fill = "none", stroke_width = 4)
 #' }
 #' @export
 A <- function(
 	rx,
 	ry = rx,
-	x_axis_rotation = 0,
-	large_arc_flag = FALSE,
-	sweep_flag = FALSE,
+	x_axis_rotation = -a,
+	large_arc_flag = big,
+	sweep_flag = cw,
 	x,
 	y = NULL,
 	...,
 	sep = getOption("dee.sep", ","),
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL),
-	digits = getOption("dee.digits", Inf)
+	digits = getOption("dee.digits", Inf),
+	a = 0,
+	cw = FALSE,
+	big = FALSE
 ) {
 	check_dots_empty()
 	stopifnot(is.numeric(rx), is.numeric(rx))
