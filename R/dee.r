@@ -15,6 +15,32 @@ dee <- function(x) {
 }
 
 #' @export
+`[.dee` <- function(x, i) {
+	y <- NextMethod()
+	class(y) <- c("dee", "character")
+	x
+}
+
+#' @export
+`[[.dee` <- function(x, i) {
+	y <- NextMethod()
+	class(y) <- c("dee", "character")
+	x
+}
+
+#' @export
+`[<-.dee` <- function(x, i, value) {
+	stopifnot(inherits(value, "dee"))
+	NextMethod()
+}
+
+#' @export
+`[[<-.dee` <- function(x, i, value) {
+	stopifnot(inherits(value, "dee"))
+	NextMethod()
+}
+
+#' @export
 `+.dee` <- function(e1, e2) {
 	dee(paste(e1, e2))
 }
@@ -56,7 +82,7 @@ print.dee <- function(x, ...) {
 #' if (requireNamespace("omsvg", quietly = TRUE)) {
 #'   svg <- as_omsvg(d, height = 100, width = 100,
 #'                 fill = "fill", stroke = "none")
-#'   paste(svg, collapse = "\n") |> cat()
+#'   paste(svg, collapse = "\n") |> cat("\n")
 #' }
 #' @export
 as_omsvg <- function(
@@ -78,12 +104,14 @@ as_omsvg <- function(
 	bg <- MZ(x = c(0, 0, width, width), y = c(0, height, height, 0))
 	svg <- omsvg::SVG(width = width, height = height, viewbox = TRUE) |>
 		omsvg::svg_path(bg, fill = background_color, stroke = "none")
+
+	x <- as.character(x)
 	n <- length(x)
 	stroke <- rep_len_null(stroke, n)
 	stroke_width <- rep_len_null(stroke_width, n)
 	fill <- rep_len_null(fill, n)
 	for (i in seq.int(n)) {
-		d <- as.character(x[[i]])
+		d <- x[[i]]
 		svg <- svg |>
 			omsvg::svg_path(
 				d,
