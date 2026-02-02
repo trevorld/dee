@@ -32,3 +32,13 @@ test_that("`dee()`", {
 	plot(d, height = 100, width = 100, stroke = "black", stroke_width = 4)
 	invisible(grDevices::dev.off())
 })
+
+test_that("`as_coord2d.dee()`", {
+	d <- d_rect(5, 5, 2, 2)
+	xy <- as_coord2d(d)
+	expect_equal(xy$x, c(4, 4, 6, 6))
+	expect_equal(xy$y, c(4, 6, 6, 4))
+	xy <- as_coord2d(d, origin_at_bottom = TRUE, height = 10)
+	expect_equal(xy$x, c(4, 4, 6, 6))
+	expect_equal(xy$y, c(6, 4, 4, 6))
+})
