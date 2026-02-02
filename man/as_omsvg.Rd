@@ -37,6 +37,6 @@ d <- d_star(x = 50, y = 50, r = 30, s = s, n = 5, digits = 0)
 if (requireNamespace("omsvg", quietly = TRUE)) {
   svg <- as_omsvg(d, height = 100, width = 100,
                 fill = "fill", stroke = "none")
-  paste(svg, collapse = "\n") |> cat()
+  paste(svg, collapse = "\n") |> cat("\n")
 }
 }
