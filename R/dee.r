@@ -191,3 +191,27 @@ rep_len_null <- function(x, length.out) {
 		rep_len(x, length.out)
 	}
 }
+
+#' @export
+as_coord2d.dee <- function(
+	x,
+	...,
+	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
+	height = getOption("dee.height", NULL)
+) {
+	x <- as.character(x)
+	re <- "^M ([[:digit:]]+\\.?[[:digit:]]*[, ][[:digit:]]+\\.?[[:digit:]]* )+Z$"
+	stopifnot(length(x) == 1L, grepl(re, x))
+	x <- gsub("^M ", "", x)
+	x <- gsub(" Z$", "", x)
+	x <- gsub(",", " ", x)
+	ns <- strsplit(x, " ")[[1L]]
+	i_odd <- seq.int(1L, length(ns), by = 2L)
+	i_even <- seq.int(2L, length(ns), by = 2L)
+	x <- as.numeric(ns[i_odd])
+	y <- as.numeric(ns[i_even])
+	if (isTRUE(origin_at_bottom)) {
+		y <- height - y
+	}
+	as_coord2d(x, y)
+}
