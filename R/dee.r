@@ -18,14 +18,14 @@ dee <- function(x) {
 `[.dee` <- function(x, i) {
 	y <- NextMethod()
 	class(y) <- c("dee", "character")
-	x
+	y
 }
 
 #' @export
 `[[.dee` <- function(x, i) {
 	y <- NextMethod()
 	class(y) <- c("dee", "character")
-	x
+	y
 }
 
 #' @export

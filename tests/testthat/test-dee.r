@@ -11,9 +11,12 @@ test_that("`dee()`", {
 
 	ds <- c(d, d2)
 	expect_true(inherits(ds, "dee"))
+	expect_equal(length(ds), 2L)
 
 	expect_true(inherits(ds[2L], "dee"))
+	expect_equal(length(ds[2L]), 1L)
 	expect_true(inherits(ds[[2L]], "dee"))
+	expect_equal(length(ds[[2L]]), 1L)
 
 	ds[3L] <- d2
 	expect_true(inherits(ds, "dee"))
