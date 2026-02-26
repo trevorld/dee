@@ -49,3 +49,7 @@ Initial features
     + `d_regular_ngon()` is a wrapper around `d_polygon()` to create regular polygons.
 
   + `d_rect()` is a wrapper around `d_polygon()` to build rectangle paths.
+
+* Miscellaneous helper functions:
+
+  + `height_slash_left()`, `height_slash_right()`, `width_slash_left()`, and `width_slash_right()` return the height or width of the left or right end of a `d_fslash()` or `d_bslash()` shape.

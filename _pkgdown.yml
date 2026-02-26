@@ -25,6 +25,10 @@ reference:
       contents:
         - as_omsvg
         - ends_with("dee")
+    - title: "Miscellaneous helper functions"
+      desc: ""
+      contents:
+        - height_slash_left
     - title: "Package options"
       desc: ""
       contents:

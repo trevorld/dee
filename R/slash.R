@@ -13,6 +13,7 @@
 #'                       This only affects the left and right ends.
 #' @param ... Passed to [MZ()].
 #' @return A [dee()] object.
+#' @seealso [width_slash_left()], [width_slash_right()], [height_slash_left()], [height_slash_right()]
 #' @examples
 #' d_h <- d_fslash(2, 8, 8, 2, 1)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
@@ -411,6 +412,193 @@ bslash_ds <- function(y_top, x_right, y_bottom, x_left, w, ...) {
 	x <- c(x_left, x_left + h, x_right, x_right, x_right - h)
 	y <- c(y_top + v, y_top, y_bottom - v, y_bottom, y_bottom)
 	MZ(x, y, ..., origin_at_bottom = FALSE)
+}
+
+#' Height/width of slash ends
+#'
+#' `height_slash_left()`, `height_slash_right()`,
+#' `width_slash_left()`, and `width_slash_right()`
+#' return the height or width of the left or right end of the equivalent
+#' [d_fslash()] or [d_bslash()] shapes.
+#' @param dx The difference `x_right - x_left` in [d_fslash()] and [d_bslash()].
+#' @param dy The difference `y_bottom - y_top` in [d_fslash()] and [d_bslash()].
+#' @param w The (stroke) width of the slash "line".
+#' @param ... Must be empty.
+#' @param nib,left,right The shape of the "nib" tracing the line.
+#'                       This only affects the left and right ends.
+#' @return A numeric value.
+#' @examples
+#' width_slash_left(6, 6, 1, nib = "horizontal")
+#' width_slash_left(6, 6, 1, left = "horizontal", right = "vertical")
+#' height_slash_left(6, 6, 1, nib = "diagonal")
+#' height_slash_right(6, 6, 1, nib = "diagonal")
+#' width_slash_right(6, 6, 1, nib = "vertical")
+#' @seealso [d_fslash()] and [d_bslash()]
+#' @export
+height_slash_left <- function(
+	dx,
+	dy,
+	w,
+	...,
+	nib = c("horizontal", "diagonal", "square", "vertical"),
+	left = nib,
+	right = nib
+) {
+	check_dots_empty()
+	nibs <- c("horizontal", "diagonal", "square", "vertical")
+	left <- match.arg(left[[1L]], nibs)
+	right <- match.arg(right[[1L]], nibs)
+	switch(
+		left,
+		horizontal = 0,
+		diagonal = ,
+		square = switch(
+			right,
+			horizontal = {
+				h1 <- h_fslash_hh(dx, dy, 0.5 * w)
+				v_fslash_vh(dx - h1, dy, 0.5 * w)
+			},
+			diagonal = ,
+			square = v_fslash_vh(dx, dy, 0.5 * w),
+			vertical = v_fslash_vv(dx, dy, 0.5 * w)
+		),
+		vertical = switch(
+			right,
+			horizontal = v_fslash_vh(dx, dy, w),
+			diagonal = ,
+			square = {
+				v1 <- v_fslash_vv(dx, dy, 0.5 * w)
+				v1 + v_fslash_vh(dx, dy - v1, 0.5 * w)
+			},
+			vertical = v_fslash_vv(dx, dy, w)
+		)
+	)
+}
+
+#' @rdname height_slash_left
+#' @export
+height_slash_right <- function(
+	dx,
+	dy,
+	w,
+	...,
+	nib = c("horizontal", "diagonal", "square", "vertical"),
+	left = nib,
+	right = nib
+) {
+	check_dots_empty()
+	nibs <- c("horizontal", "diagonal", "square", "vertical")
+	left <- match.arg(left[[1L]], nibs)
+	right <- match.arg(right[[1L]], nibs)
+	switch(
+		right,
+		horizontal = 0,
+		diagonal = ,
+		square = switch(
+			left,
+			horizontal = {
+				h1 <- h_fslash_hh(dx, dy, 0.5 * w)
+				v_fslash_vh(dx - h1, dy, 0.5 * w)
+			},
+			diagonal = ,
+			square = v_fslash_vh(dx, dy, 0.5 * w),
+			vertical = v_fslash_vv(dx, dy, 0.5 * w)
+		),
+		vertical = switch(
+			left,
+			horizontal = v_fslash_vh(dx, dy, w),
+			diagonal = ,
+			square = {
+				v1 <- v_fslash_vv(dx, dy, 0.5 * w)
+				v1 + v_fslash_vh(dx, dy - v1, 0.5 * w)
+			},
+			vertical = v_fslash_vv(dx, dy, w)
+		)
+	)
+}
+
+#' @rdname height_slash_left
+#' @export
+width_slash_left <- function(
+	dx,
+	dy,
+	w,
+	...,
+	nib = c("horizontal", "diagonal", "square", "vertical"),
+	left = nib,
+	right = nib
+) {
+	check_dots_empty()
+	nibs <- c("horizontal", "diagonal", "square", "vertical")
+	left <- match.arg(left[[1L]], nibs)
+	right <- match.arg(right[[1L]], nibs)
+	switch(
+		left,
+		horizontal = switch(
+			right,
+			horizontal = h_fslash_hh(dx, dy, w),
+			diagonal = ,
+			square = {
+				h1 <- h_fslash_hh(dx, dy, 0.5 * w)
+				h1 + h_fslash_vh(dx - h1, dy, 0.5 * w)
+			},
+			vertical = h_fslash_vh(dx, dy, w)
+		),
+		diagonal = ,
+		square = switch(
+			right,
+			horizontal = h_fslash_hh(dx, dy, 0.5 * w),
+			diagonal = ,
+			square = h_fslash_vh(dx, dy, 0.5 * w),
+			vertical = {
+				v1 <- v_fslash_vv(dx, dy, 0.5 * w)
+				h_fslash_vh(dx, dy - v1, 0.5 * w)
+			}
+		),
+		vertical = 0
+	)
+}
+
+#' @rdname height_slash_left
+#' @export
+width_slash_right <- function(
+	dx,
+	dy,
+	w,
+	...,
+	nib = c("horizontal", "diagonal", "square", "vertical"),
+	left = nib,
+	right = nib
+) {
+	check_dots_empty()
+	nibs <- c("horizontal", "diagonal", "square", "vertical")
+	left <- match.arg(left[[1L]], nibs)
+	right <- match.arg(right[[1L]], nibs)
+	switch(
+		right,
+		horizontal = switch(
+			left,
+			horizontal = h_fslash_hh(dx, dy, w),
+			diagonal = ,
+			square = {
+				h1 <- h_fslash_hh(dx, dy, 0.5 * w)
+				h1 + h_fslash_vh(dx - h1, dy, 0.5 * w)
+			},
+			vertical = h_fslash_vh(dx, dy, w)
+		),
+		diagonal = ,
+		square = switch(
+			left,
+			horizontal = h_fslash_hh(dx, dy, 0.5 * w),
+			diagonal = ,
+			square = h_fslash_vh(dx, dy, 0.5 * w),
+			vertical = {
+				v1 <- v_fslash_vv(dx, dy, 0.5 * w)
+				h_fslash_vh(dx, dy - v1, 0.5 * w)
+			}
+		),
+		vertical = 0
+	)
 }
 
 bslash_vh <- function(y_top, x_right, y_bottom, x_left, w, ...) {
