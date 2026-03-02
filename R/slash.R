@@ -413,6 +413,19 @@ bslash_ds <- function(y_top, x_right, y_bottom, x_left, w, ...) {
 	y <- c(y_top + v, y_top, y_bottom - v, y_bottom, y_bottom)
 	MZ(x, y, ..., origin_at_bottom = FALSE)
 }
+bslash_vh <- function(y_top, x_right, y_bottom, x_left, w, ...) {
+	h <- h_fslash_vh(x_right - x_left, y_bottom - y_top, w)
+	v <- v_fslash_vh(x_right - x_left, y_bottom - y_top, w)
+	x <- c(x_left, x_left, x_right, x_right - h)
+	y <- c(y_top + v, y_top, y_bottom, y_bottom)
+	MZ(x, y, ..., origin_at_bottom = FALSE)
+}
+bslash_vv <- function(y_top, x_right, y_bottom, x_left, w, ...) {
+	v <- v_fslash_vv(x_right - x_left, y_bottom - y_top, w)
+	x <- c(x_left, x_left, x_right, x_right)
+	y <- c(y_top + v, y_top, y_bottom - v, y_bottom)
+	MZ(x, y, ..., origin_at_bottom = FALSE)
+}
 
 #' Height/width of slash ends
 #'
@@ -599,18 +612,4 @@ width_slash_right <- function(
 		),
 		vertical = 0
 	)
-}
-
-bslash_vh <- function(y_top, x_right, y_bottom, x_left, w, ...) {
-	h <- h_fslash_vh(x_right - x_left, y_bottom - y_top, w)
-	v <- v_fslash_vh(x_right - x_left, y_bottom - y_top, w)
-	x <- c(x_left, x_left, x_right, x_right - h)
-	y <- c(y_top + v, y_top, y_bottom, y_bottom)
-	MZ(x, y, ..., origin_at_bottom = FALSE)
-}
-bslash_vv <- function(y_top, x_right, y_bottom, x_left, w, ...) {
-	v <- v_fslash_vv(x_right - x_left, y_bottom - y_top, w)
-	x <- c(x_left, x_left, x_right, x_right)
-	y <- c(y_top + v, y_top, y_bottom - v, y_bottom)
-	MZ(x, y, ..., origin_at_bottom = FALSE)
 }
