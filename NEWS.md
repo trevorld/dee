@@ -53,3 +53,4 @@ Initial features
 * Miscellaneous helper functions:
 
   + `height_slash_left()`, `height_slash_right()`, `width_slash_left()`, and `width_slash_right()` return the height or width of the left or right end of a `d_fslash()` or `d_bslash()` shape.
+  + `x_ellipse_left()`, `x_ellipse_right()`, `y_ellipse_top()`, and `y_ellipse_bottom()` return the leftmost/rightmost x-coordinate or topmost/bottommost y-coordinate on a (possibly rotated) ellipse at a given y or x value.
