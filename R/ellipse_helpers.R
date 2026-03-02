@@ -74,24 +74,6 @@ x_ellipse_right <- function(
 	pmax(b$x1, b$x2)
 }
 
-x_ellipse_both <- function(y, xc, yc, rx, ry, a) {
-	a <- -degrees(a)
-	dy <- y - yc
-	A <- rx * sin(a)
-	B <- ry * cos(a)
-	R <- sqrt(A^2 + B^2)
-	phi <- atan2(B, A)
-	da <- acos(dy / R)
-	t1 <- phi + da
-	t2 <- phi - da
-	ca <- cos(a)
-	sa <- sin(a)
-	list(
-		x1 = xc + rx * cos(t1) * ca - ry * sin(t1) * sa,
-		x2 = xc + rx * cos(t2) * ca - ry * sin(t2) * sa
-	)
-}
-
 #' @rdname x_ellipse_left
 #' @export
 y_ellipse_top <- function(
@@ -134,13 +116,43 @@ y_ellipse_bottom <- function(
 	pmax(b$y1, b$y2)
 }
 
+# rotated ellipse centered at (xc, yc) with radii rx, ry and angle a:
+#   x(t) = xc + rx * cos(t) * cos(a) - ry * sin(t) * sin(a)
+#   y(t) = yc + rx * cos(t) * sin(a) + ry * sin(t) * cos(a)
+
+# harmonic addition identity:
+#   A * cos(t) + B * sin(t) = R * cos(t - phi)
+#   where R = sqrt(A^2 + B^2) and phi = atan2(B, A)
+
+x_ellipse_both <- function(y, xc, yc, rx, ry, a) {
+	a <- -degrees(a) # since svg y increases downward
+	# Given y we need to find t so that y(t) = y <=> y(t) - yc = y - yc
+	dy <- y - yc # = rx * sin(a) * cos(t) + ry * cos(a) * sin(t)
+	A <- rx * sin(a)
+	B <- ry * cos(a)
+	R <- sqrt(A^2 + B^2)
+	phi <- atan2(B, A)
+	# => dy = R * cos(t - phi) which gives us two solutions for t
+	da <- acos(dy / R)
+	t1 <- phi + da
+	t2 <- phi - da
+	ca <- cos(a)
+	sa <- sin(a)
+	list(
+		x1 = xc + rx * cos(t1) * ca - ry * sin(t1) * sa,
+		x2 = xc + rx * cos(t2) * ca - ry * sin(t2) * sa
+	)
+}
+
 y_ellipse_both <- function(x, xc, yc, rx, ry, a) {
-	a <- -degrees(a)
-	dx <- x - xc
+	a <- -degrees(a) # since svg y increases downward
+	# Given x we need to find t so that x(t) = x <=> x(t) - xc = x - xc
+	dx <- x - xc # = rx * cos(t) * cos(a) - ry * sin(t) * sin(a)
 	A <- rx * cos(a)
 	B <- -ry * sin(a)
 	R <- sqrt(A^2 + B^2)
 	phi <- atan2(B, A)
+	# => dx = R * cos(t - phi) which gives us two solutions for t
 	da <- acos(dx / R)
 	t1 <- phi + da
 	t2 <- phi - da
