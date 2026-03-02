@@ -29,6 +29,8 @@ reference:
       desc: ""
       contents:
         - height_slash_left
+        - x_ellipse_left
+        - y_ellipse_top
     - title: "Package options"
       desc: ""
       contents:
