@@ -634,7 +634,7 @@ A <- function(
 	big = FALSE
 ) {
 	check_dots_empty()
-	stopifnot(is.numeric(rx), is.numeric(rx))
+	stopifnot(is.numeric(rx), is.numeric(ry))
 	rxy <- paste(rx, ry, sep = sep)
 
 	x_axis_rotation <- as.numeric(degrees(x_axis_rotation))
@@ -675,7 +675,7 @@ aa <- function(
 	digits = getOption("dee.digits", Inf)
 ) {
 	check_dots_empty()
-	stopifnot(is.numeric(rx), is.numeric(rx))
+	stopifnot(is.numeric(rx), is.numeric(ry))
 	rxy <- paste(rx, ry, sep = sep)
 
 	large_arc <- as.integer(as.logical(large_arc_flag))
