@@ -1,8 +1,8 @@
 test_that("`dee()`", {
 	d <- dee("M 10,30") + dee("v 30")
-	expect_true(inherits(d, "dee"))
+	expect_s3_class(d, "dee")
 	expect_false(inherits(as.character(d), "dee"))
-	expect_true(inherits(format(d), "character"))
+	expect_type(format(d), "character")
 	s <- capture.output({
 		d2 <- print(d)
 	})
@@ -10,18 +10,18 @@ test_that("`dee()`", {
 	expect_equal(s, c("<dee[1]>", "M 10,30 v 30"))
 
 	ds <- c(d, d2)
-	expect_true(inherits(ds, "dee"))
+	expect_s3_class(ds, "dee")
 	expect_equal(length(ds), 2L)
 
-	expect_true(inherits(ds[2L], "dee"))
+	expect_s3_class(ds[2L], "dee")
 	expect_equal(length(ds[2L]), 1L)
-	expect_true(inherits(ds[[2L]], "dee"))
+	expect_s3_class(ds[[2L]], "dee")
 	expect_equal(length(ds[[2L]]), 1L)
 
 	ds[3L] <- d2
-	expect_true(inherits(ds, "dee"))
+	expect_s3_class(ds, "dee")
 	ds[[4L]] <- d2
-	expect_true(inherits(ds, "dee"))
+	expect_s3_class(ds, "dee")
 	expect_error({
 		ds[5L] <- "boo"
 	})
