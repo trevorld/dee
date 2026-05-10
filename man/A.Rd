@@ -48,7 +48,7 @@ az(...)
 \item{rx, ry}{Radius of ellipse.}
 
 \item{x_axis_rotation, a}{Angle (in degrees) to rotate ellipse clockwise.
-Will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}.
+Will be coerced by \code{\link[affiner:degrees]{affiner::degrees()}}.
 If \code{isTRUE(origin_at_bottom)} then will be multiplied by \code{-1} in the output.
 \code{a} is an alternative that instead rotates the ellipse counter-clockwise.}
 

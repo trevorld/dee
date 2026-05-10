@@ -23,7 +23,7 @@ Else a numeric vector.}
 
 \item{w, h}{The width and height of the rectangle.}
 
-\item{a}{The angle of rotation (will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}).}
+\item{a}{The angle of rotation (will be coerced by \code{\link[affiner:degrees]{affiner::degrees()}}).}
 
 \item{...}{Passed to \code{\link[=d_polygon]{d_polygon()}}.}
 

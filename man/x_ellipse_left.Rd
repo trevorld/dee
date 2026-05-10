@@ -58,7 +58,7 @@ y_ellipse_bottom(
 
 \item{rx, ry}{The x and y radii of the (unrotated) ellipse.}
 
-\item{a}{The counter-clockwise angle of rotation of the ellipse (will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}).}
+\item{a}{The counter-clockwise angle of rotation of the ellipse (will be coerced by \code{\link[affiner:degrees]{affiner::degrees()}}).}
 
 \item{...}{Should be empty.}
 

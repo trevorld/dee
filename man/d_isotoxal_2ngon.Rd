@@ -43,7 +43,7 @@ Else a numeric vector.}
 
 \item{n}{The number of outer vertices.}
 
-\item{a}{The angle of the first outer vertex (will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}).}
+\item{a}{The angle of the first outer vertex (will be coerced by \code{\link[affiner:degrees]{affiner::degrees()}}).}
 
 \item{...}{Passed to \code{\link[=d_polygon]{d_polygon()}}.}
 
