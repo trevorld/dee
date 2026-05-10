@@ -22,12 +22,8 @@ test_that("`dee()`", {
 	expect_s3_class(ds, "dee")
 	ds[[4L]] <- d2
 	expect_s3_class(ds, "dee")
-	expect_error({
-		ds[5L] <- "boo"
-	})
-	expect_error({
-		ds[[5L]] <- "boo"
-	})
+	expect_snapshot(error = TRUE, ds[5L] <- "boo")
+	expect_snapshot(error = TRUE, ds[[5L]] <- "boo")
 
 	skip_if_not_installed("omsvg")
 	skip_if_not_installed("svgparser")

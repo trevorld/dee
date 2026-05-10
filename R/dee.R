@@ -53,7 +53,7 @@ c.dee <- function(...) {
 #' @export
 format.dee <- function(x, ...) {
 	x <- as.character(x)
-	x <- gsub("([Z|z] )", "\\1\n", x)
+	x <- gsub("([Zz] )", "\\1\n", x)
 	x
 }
 
@@ -71,7 +71,7 @@ print.dee <- function(x, ...) {
 #' `as_omsvg()` converts a `dee` object to an `omsvg` "svg" class object
 #' using [omsvg::SVG()] and [omsvg::svg_path()].
 #'
-#' @param x An object of class "x".
+#' @param x An object of class "dee".
 #' @param ... Passed to [omsvg::svg_path()].
 #' @param height,width svg width and height.
 #' @param background_color Background color.

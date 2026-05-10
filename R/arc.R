@@ -1,3 +1,27 @@
+arc_setup <- function(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height) {
+	y_top <- as.numeric(y_top)
+	x_right <- as.numeric(x_right)
+	y_bottom <- as.numeric(y_bottom)
+	x_left <- as.numeric(x_left)
+	w <- as.numeric(w)
+	if (isTRUE(origin_at_bottom)) {
+		y_top <- height - y_top
+		y_bottom <- height - y_bottom
+	}
+	dx <- x_right - x_left
+	dy <- y_bottom - y_top
+	stopifnot(all(w < dx), all(w < dy))
+	list(
+		y_top = y_top,
+		x_right = x_right,
+		y_bottom = y_bottom,
+		x_left = x_left,
+		w = w,
+		dx = dx,
+		dy = dy
+	)
+}
+
 #' Elliptical arc path convenience wrapper
 #'
 #' `d_arc1()` `d_arc2()`, `d_arc3()`, `d_arc4()`,
@@ -51,23 +75,12 @@ d_arc1 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left, y_top, ...) +
-		A(rx = dx, ry = dy, x = x_right, y = y_bottom, sweep_flag = TRUE) +
-		H(x = x_right - w, ...) +
-		AZ(rx = dx - w, ry = dy - w, x = x_left, y = y_top + w, ...)
+	M(p$x_left, p$y_top, ...) +
+		A(rx = p$dx, ry = p$dy, x = p$x_right, y = p$y_bottom, sweep_flag = TRUE) +
+		H(x = p$x_right - p$w, ...) +
+		AZ(rx = p$dx - p$w, ry = p$dy - p$w, x = p$x_left, y = p$y_top + p$w, ...)
 }
 
 #' @rdname d_arc
@@ -82,23 +95,12 @@ d_arc2 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left, y_bottom, ...) +
-		A(rx = dx, ry = dy, x = x_right, y = y_top, sweep_flag = TRUE) +
-		V(y = y_top + w, ...) +
-		AZ(rx = dx - w, ry = dy - w, x = x_left + w, y = y_bottom, ...)
+	M(p$x_left, p$y_bottom, ...) +
+		A(rx = p$dx, ry = p$dy, x = p$x_right, y = p$y_top, sweep_flag = TRUE) +
+		V(y = p$y_top + p$w, ...) +
+		AZ(rx = p$dx - p$w, ry = p$dy - p$w, x = p$x_left + p$w, y = p$y_bottom, ...)
 }
 
 #' @rdname d_arc
@@ -113,23 +115,12 @@ d_arc3 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left + w, y_top, ...) +
-		A(rx = dx - w, ry = dy - w, x = x_right, y = y_bottom - w, ...) +
-		V(y = y_bottom) +
-		AZ(rx = dx, ry = dy, x = x_left, y = y_top, sweep_flag = TRUE, ...)
+	M(p$x_left + p$w, p$y_top, ...) +
+		A(rx = p$dx - p$w, ry = p$dy - p$w, x = p$x_right, y = p$y_bottom - p$w, ...) +
+		V(y = p$y_bottom) +
+		AZ(rx = p$dx, ry = p$dy, x = p$x_left, y = p$y_top, sweep_flag = TRUE, ...)
 }
 
 #' @rdname d_arc
@@ -144,23 +135,12 @@ d_arc4 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left, y_bottom - w, ...) +
-		A(rx = dx - w, ry = dy - w, x = x_right - w, y = y_top, ...) +
-		H(x = x_right, ...) +
-		AZ(rx = dx, ry = dy, x = x_left, y = y_bottom, sweep_flag = TRUE, ...)
+	M(p$x_left, p$y_bottom - p$w, ...) +
+		A(rx = p$dx - p$w, ry = p$dy - p$w, x = p$x_right - p$w, y = p$y_top, ...) +
+		H(x = p$x_right, ...) +
+		AZ(rx = p$dx, ry = p$dy, x = p$x_left, y = p$y_bottom, sweep_flag = TRUE, ...)
 }
 
 #' @rdname d_arc
@@ -175,23 +155,12 @@ d_arc12 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left, y_bottom, ...) +
-		A(rx = dx / 2, ry = dy, x = x_right, y = y_bottom, ..., sweep_flag = TRUE) +
-		H(x = x_right - w, ...) +
-		AZ(rx = dx / 2 - w, ry = dy - w, x = x_left + w, y = y_bottom, ...)
+	M(p$x_left, p$y_bottom, ...) +
+		A(rx = p$dx / 2, ry = p$dy, x = p$x_right, y = p$y_bottom, ..., sweep_flag = TRUE) +
+		H(x = p$x_right - p$w, ...) +
+		AZ(rx = p$dx / 2 - p$w, ry = p$dy - p$w, x = p$x_left + p$w, y = p$y_bottom, ...)
 }
 
 #' @rdname d_arc
@@ -206,23 +175,12 @@ d_arc23 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_right, y_bottom, ...) +
-		A(rx = dx, ry = dy / 2, x = x_right, y = y_top, ..., sweep_flag = TRUE) +
-		V(y = y_top + w, ...) +
-		AZ(rx = dx - w, ry = dy / 2 - w, x = x_right, y = y_bottom - w, ...)
+	M(p$x_right, p$y_bottom, ...) +
+		A(rx = p$dx, ry = p$dy / 2, x = p$x_right, y = p$y_top, ..., sweep_flag = TRUE) +
+		V(y = p$y_top + p$w, ...) +
+		AZ(rx = p$dx - p$w, ry = p$dy / 2 - p$w, x = p$x_right, y = p$y_bottom - p$w, ...)
 }
 
 #' @rdname d_arc
@@ -237,23 +195,12 @@ d_arc34 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left + w, y_top, ...) +
-		A(rx = dx / 2 - w, ry = dy - w, x = x_right - w, y = y_top, ...) +
-		H(x = x_right, ...) +
-		AZ(rx = dx / 2, ry = dy, x = x_left, y = y_top, ..., sweep_flag = TRUE)
+	M(p$x_left + p$w, p$y_top, ...) +
+		A(rx = p$dx / 2 - p$w, ry = p$dy - p$w, x = p$x_right - p$w, y = p$y_top, ...) +
+		H(x = p$x_right, ...) +
+		AZ(rx = p$dx / 2, ry = p$dy, x = p$x_left, y = p$y_top, ..., sweep_flag = TRUE)
 }
 
 #' @rdname d_arc
@@ -268,23 +215,12 @@ d_arc41 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left, y_top, ...) +
-		A(rx = dx, ry = dy / 2, x = x_left, y = y_bottom, ..., sweep_flag = TRUE) +
-		V(y = y_bottom - w, ...) +
-		AZ(rx = dx - w, ry = dy / 2 - w, x = x_left, y = y_top + w, ...)
+	M(p$x_left, p$y_top, ...) +
+		A(rx = p$dx, ry = p$dy / 2, x = p$x_left, y = p$y_bottom, ..., sweep_flag = TRUE) +
+		V(y = p$y_bottom - p$w, ...) +
+		AZ(rx = p$dx - p$w, ry = p$dy / 2 - p$w, x = p$x_left, y = p$y_top + p$w, ...)
 }
 
 #' @rdname d_arc
@@ -299,35 +235,24 @@ d_arc123 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left + dx / 2, y_bottom, ...) +
+	M(p$x_left + p$dx / 2, p$y_bottom, ...) +
 		A(
-			rx = dx / 2,
-			ry = dy / 2,
-			x = x_right,
-			y = y_top + dy / 2,
+			rx = p$dx / 2,
+			ry = p$dy / 2,
+			x = p$x_right,
+			y = p$y_top + p$dy / 2,
 			...,
 			large_arc_flag = TRUE,
 			sweep_flag = TRUE
 		) +
-		H(x = x_right - w, ...) +
+		H(x = p$x_right - p$w, ...) +
 		AZ(
-			rx = dx / 2 - w,
-			ry = dy / 2 - w,
-			x = x_left + dx / 2,
-			y = y_bottom - w,
+			rx = p$dx / 2 - p$w,
+			ry = p$dy / 2 - p$w,
+			x = p$x_left + p$dx / 2,
+			y = p$y_bottom - p$w,
 			...,
 			large_arc_flag = TRUE
 		)
@@ -345,35 +270,24 @@ d_arc234 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_right, y_top + dy / 2, ...) +
+	M(p$x_right, p$y_top + p$dy / 2, ...) +
 		A(
-			rx = dx / 2,
-			ry = dy / 2,
-			x = x_left + dx / 2,
-			y = y_top,
+			rx = p$dx / 2,
+			ry = p$dy / 2,
+			x = p$x_left + p$dx / 2,
+			y = p$y_top,
 			...,
 			large_arc_flag = TRUE,
 			sweep_flag = TRUE
 		) +
-		V(y = y_top + w, ...) +
+		V(y = p$y_top + p$w, ...) +
 		AZ(
-			rx = dx / 2 - w,
-			ry = dy / 2 - w,
-			x = x_right - w,
-			y = y_top + dy / 2,
+			rx = p$dx / 2 - p$w,
+			ry = p$dy / 2 - p$w,
+			x = p$x_right - p$w,
+			y = p$y_top + p$dy / 2,
 			...,
 			large_arc_flag = TRUE
 		)
@@ -391,35 +305,24 @@ d_arc341 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left + dx / 2, y_top, ...) +
+	M(p$x_left + p$dx / 2, p$y_top, ...) +
 		A(
-			rx = dx / 2,
-			ry = dy / 2,
-			x = x_left,
-			y = y_top + dy / 2,
+			rx = p$dx / 2,
+			ry = p$dy / 2,
+			x = p$x_left,
+			y = p$y_top + p$dy / 2,
 			...,
 			large_arc_flag = TRUE,
 			sweep_flag = TRUE
 		) +
-		H(x = x_left + w, ...) +
+		H(x = p$x_left + p$w, ...) +
 		AZ(
-			rx = dx / 2 - w,
-			ry = dy / 2 - w,
-			x = x_left + dx / 2,
-			y = y_top + w,
+			rx = p$dx / 2 - p$w,
+			ry = p$dy / 2 - p$w,
+			x = p$x_left + p$dx / 2,
+			y = p$y_top + p$w,
 			...,
 			large_arc_flag = TRUE
 		)
@@ -437,35 +340,24 @@ d_arc412 <- function(
 	origin_at_bottom = getOption("dee.origin_at_bottom", FALSE),
 	height = getOption("dee.height", NULL)
 ) {
-	y_top <- as.numeric(y_top)
-	x_right <- as.numeric(x_right)
-	y_bottom <- as.numeric(y_bottom)
-	x_left <- as.numeric(x_left)
-	w <- as.numeric(w)
-	if (isTRUE(origin_at_bottom)) {
-		y_top <- height - y_top
-		y_bottom <- height - y_bottom
-	}
-	dx <- x_right - x_left
-	dy <- y_bottom - y_top
-	stopifnot(all(w < dx), all(w < dy))
+	p <- arc_setup(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, height)
 	rlang::local_options(dee.origin_at_bottom = FALSE)
-	M(x_left, y_top + dy / 2, ...) +
+	M(p$x_left, p$y_top + p$dy / 2, ...) +
 		A(
-			rx = dx / 2,
-			ry = dy / 2,
-			x = x_left + dx / 2,
-			y = y_bottom,
+			rx = p$dx / 2,
+			ry = p$dy / 2,
+			x = p$x_left + p$dx / 2,
+			y = p$y_bottom,
 			...,
 			large_arc_flag = TRUE,
 			sweep_flag = TRUE
 		) +
-		V(y = y_bottom - w, ...) +
+		V(y = p$y_bottom - p$w, ...) +
 		AZ(
-			rx = dx / 2 - w,
-			ry = dy / 2 - w,
-			x = x_left + w,
-			y = y_top + dy / 2,
+			rx = p$dx / 2 - p$w,
+			ry = p$dy / 2 - p$w,
+			x = p$x_left + p$w,
+			y = p$y_top + p$dy / 2,
 			...,
 			large_arc_flag = TRUE
 		)

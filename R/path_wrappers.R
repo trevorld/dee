@@ -185,7 +185,7 @@ d_polygon <- function(
 	if (length(offset) == 1L && offset == 0) {
 		return(MZ(x, y, ...))
 	}
-	stopifnot(requireNamespace("polyclip", quietly = TRUE))
+	rlang::check_installed("polyclip")
 	p <- as_coords(x, y)
 	x <- p$x
 	y <- p$y

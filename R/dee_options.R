@@ -1,5 +1,3 @@
-default_options <- list(dee.sep = ",", dee.origin_at_bottom = FALSE, dee.height = NULL)
-
 #' Get dee options
 #'
 #' `dee_options()` returns the `dee` package's global options.
