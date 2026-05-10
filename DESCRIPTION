@@ -1,7 +1,7 @@
 Package: dee
 Type: Package
 Title: 'd' Attribute Tools
-Version: 0.1.0-26
+Version: 0.1.0-27
 Authors@R: c(person("Trevor L.", "Davis", role=c("aut", "cre"),
              email="trevor.l.davis@gmail.com",
              comment = c(ORCID = "0000-0001-6341-4639")))
@@ -11,7 +11,7 @@ Description: Utilities to build an svg path 'd' <https://developer.mozilla.org/e
 Depends:
     R (>= 4.2)
 Imports:
-	affiner (>= 0.2.0),
+	affiner (>= 0.3.1),
 	grid,
 	rlang,
 	utils
