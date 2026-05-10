@@ -25,5 +25,5 @@ Additional_repositories: https://trevorld.r-universe.dev
 License: MIT + file LICENSE
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Encoding: UTF-8
+Config/roxygen2/version: 8.0.0

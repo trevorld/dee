@@ -26,7 +26,7 @@ Else a numeric vector.}
 
 \item{rx, ry}{The radii of the ellipse.}
 
-\item{a}{The angle of rotation (will be coerced by \code{\link[affiner:angle]{affiner::degrees()}}).}
+\item{a}{The angle of rotation (will be coerced by \code{\link[affiner:degrees]{affiner::degrees()}}).}
 
 \item{...}{Passed to \code{\link[=M]{M()}} and \code{\link[=AZ]{AZ()}}.}
 

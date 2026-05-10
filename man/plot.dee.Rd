@@ -17,7 +17,7 @@
 )
 }
 \arguments{
-\item{x}{An object of class "x".}
+\item{x}{An object of class "dee".}
 
 \item{...}{Passed to \code{\link[omsvg:svg_path]{omsvg::svg_path()}}.}
 

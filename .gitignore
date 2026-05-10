@@ -1,4 +1,5 @@
 README.html
+.claude/
 codecov.yml
 pkgdown
 *.swp

@@ -4,6 +4,7 @@ development:
     mode: auto
 template:
   bootstrap: 5
+llm-docs: false
 reference:
     - title: "svg d path commands"
       desc: "Uppercase svg d path commands use absolute coordinates and lowercase commands use relative coordinates.  Lowercase svg d path command functions are all duplicated letters (i.e. `aa()`, `cc()`, etc.) in order to avoid conflicts with base `c()`, `q()`, and `t()`.  Commands ending in a `Z()` or `z()` are convenience funcctions that add a `Z` or `z` to the end of the indicated svg d path command."
