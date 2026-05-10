@@ -72,7 +72,7 @@ d_isotoxal_2ngon <- function(
 	}
 	r <- as.numeric(r)
 	s <- as.numeric(s)
-	stopifnot(all(s < r))
+	stopifnot(all(s > 0), all(s < 1))
 	a <- -as.numeric(degrees(a), "degrees")
 	MoreArgs <- list(...)
 	MoreArgs$origin_at_bottom <- FALSE
