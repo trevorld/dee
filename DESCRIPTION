@@ -1,13 +1,16 @@
 Package: dee
 Type: Package
-Title: 'd' Attribute Tools
-Version: 0.1.0-27
+Title: 'd' Attribute Tools to Construct SVG Paths
+Version: 0.1.0-28
 Authors@R: c(person("Trevor L.", "Davis", role=c("aut", "cre"),
              email="trevor.l.davis@gmail.com",
              comment = c(ORCID = "0000-0001-6341-4639")))
 URL: https://github.com/trevorld/dee, https://trevorldavis.com/R/dee/dev/
 BugReports: https://github.com/trevorld/dee/issues
-Description: Utilities to build an svg path 'd' <https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d> attribute.
+Description: Provides helper functions to construct the SVG path 'd' <https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d> attribute string.
+	Supports all standard SVG path commands including moveto, lineto, closepath, quadratic and cubic Bézier curves, and elliptical arc curves.
+	Also provides convenience wrappers for common shapes such as rectangles, ellipses, circles, polygons, regular n-gons, isotoxal 2n-gons (stars), and backward/forward slashes.
+	Coordinates may be supplied as numeric vectors or as 'affiner' coordinate objects and an option is available to use a bottom-left origin (as is conventional in R graphics) rather than the top-left origin used by SVG.
 Depends:
     R (>= 4.2)
 Imports:
