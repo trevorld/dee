@@ -59,7 +59,7 @@ M(1, 1) + L(2, 2) + Z()
 M(1, 1) + ll(1, 1) + zz()
 d <- MZ(x = c(2, 5, 8, 5), y = c(5, 8, 5, 2))
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d, height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
 }

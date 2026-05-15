@@ -31,10 +31,10 @@
 \code{invisible(NULL)}
 }
 \description{
-\code{plot()} an object of class "dee" using \code{\link[omsvg:SVG]{omsvg::SVG()}}, \code{\link[omsvg:svg_path]{omsvg::svg_path()}}, and \code{svgparser::read_svg()}.
+\code{plot()} an object of class "dee" using \code{\link[omsvg:SVG]{omsvg::SVG()}}, \code{\link[omsvg:svg_path]{omsvg::svg_path()}}, and \code{nanosvgr::nsvg_read()}.
 }
 \details{
-This function requires the package \code{svgparser} which (as of January 2026) is not available on CRAN.  You can install it with \code{remotes::install_github('coolbutuseless/svgparser')} or \code{utils::install.packages('svgparser', repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org'))}.
+This function requires the package \code{nanosvgr} which (as of May 2026) is not available on CRAN.  You can install it with \code{remotes::install_github('coolbutuseless/nanosvgr')} or \code{utils::install.packages('nanosvgr', repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org'))}.
 }
 \examples{
 d <- M(10, 30) +
@@ -44,7 +44,7 @@ d <- M(10, 30) +
      Q(10, 60, 10, 30) +
      Z()
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d, height = 100, width = 100, background_color = "cyan",
        fill = "red", stroke = "black", stroke_width = 4)
 }

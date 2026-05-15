@@ -186,4 +186,5 @@ R packages:
 
 * [omsvg](https://github.com/rich-iannone/omsvg)
 * [svglite](https://github.com/r-lib/svglite)
+* [nanosvgr](https://github.com/coolbutuseless/nanosvgr)
 * [svgparser](https://github.com/coolbutuseless/svgparser)

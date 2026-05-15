@@ -50,7 +50,7 @@ It's vectorized in its \code{x}, \code{y}, and \code{r} arguments.
 d_circle(x = 5, y = 5, r = 2)
 d_ellipse(x = 5, y = 5, rx = 2, ry = 3)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d_ellipse(x = 5, y = 5, rx = 2, ry = 3),
        height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)

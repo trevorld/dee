@@ -26,7 +26,7 @@ test_that("`dee()`", {
 	expect_snapshot(error = TRUE, ds[[5L]] <- "boo")
 
 	skip_if_not_installed("omsvg")
-	skip_if_not_installed("svgparser")
+	skip_if_not_installed("nanosvgr")
 	grDevices::pdf(NULL)
 	plot(d, height = 100, width = 100, stroke = "black", stroke_width = 4)
 	invisible(grDevices::dev.off())

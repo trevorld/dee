@@ -42,7 +42,7 @@ It's vectorized in its \code{x}, \code{y}, \code{w}, and \code{h} arguments.
 \examples{
 d_rect(x = 5, y = 5, w = 4, h = 6)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d_rect(x = 5, y = 5, w = 4, h = 6),
        height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)

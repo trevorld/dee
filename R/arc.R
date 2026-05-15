@@ -40,25 +40,25 @@ arc_setup <- function(y_top, x_right, y_bottom, x_left, w, origin_at_bottom, hei
 #' @examples
 #' d_1 <- d_arc1(2, 8, 8, 2, 1)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d_1, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' d_2 <- d_arc2(2, 8, 8, 2, 1)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d_2, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' d_34 <- d_arc34(2, 8, 8, 2, 1)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d_34, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
 #' d_412 <- d_arc412(2, 8, 8, 2, 1)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d_412, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }

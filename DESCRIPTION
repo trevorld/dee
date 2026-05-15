@@ -1,16 +1,17 @@
 Package: dee
 Type: Package
-Title: 'd' Attribute Tools to Construct SVG Paths
-Version: 0.1.0-28
+Title: Tools to Construct SVG Path 'd' Attributes
+Version: 0.1.0-29
 Authors@R: c(person("Trevor L.", "Davis", role=c("aut", "cre"),
              email="trevor.l.davis@gmail.com",
              comment = c(ORCID = "0000-0001-6341-4639")))
 URL: https://github.com/trevorld/dee, https://trevorldavis.com/R/dee/dev/
 BugReports: https://github.com/trevorld/dee/issues
 Description: Provides helper functions to construct the SVG path 'd' <https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d> attribute string.
-	Supports all standard SVG path commands including moveto, lineto, closepath, quadratic and cubic Bézier curves, and elliptical arc curves.
-	Also provides convenience wrappers for common shapes such as rectangles, ellipses, circles, polygons, regular n-gons, isotoxal 2n-gons (stars), and backward/forward slashes.
-	Coordinates may be supplied as numeric vectors or as 'affiner' coordinate objects and an option is available to use a bottom-left origin (as is conventional in R graphics) rather than the top-left origin used by SVG.
+	Supports all standard SVG path commands including 'moveto', 'lineto', 'closepath', quadratic and cubic Bézier curves, and elliptical arc curves.
+	Also provides convenience wrappers for common shapes such as arcs, circles, ellipses, polygons, slashes, and stars.
+	Coordinates may be supplied as numeric vectors or as 'affiner' coordinate objects and an option is available to automatically round them to a target number of decimal places for more compact svg strings.
+	An option is also available to use a bottom-left origin (as is conventional in R graphics) rather than the top-left origin used by SVG.
 Depends:
     R (>= 4.2)
 Imports:
@@ -20,9 +21,9 @@ Imports:
 	utils
 Suggests:
 	grDevices,
+	nanosvgr,
 	omsvg,
 	polyclip,
-	svgparser,
 	testthat
 Additional_repositories: https://trevorld.r-universe.dev
 License: MIT + file LICENSE

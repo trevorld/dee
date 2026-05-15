@@ -32,7 +32,7 @@ zz <- function() dee("z")
 #' M(1, 1) + ll(1, 1) + zz()
 #' d <- MZ(x = c(2, 5, 8, 5), y = c(5, 8, 5, 2))
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
@@ -107,7 +107,7 @@ mz <- function(...) {
 #' M(1, 1) + ll(1, 1) + zz()
 #' d <- M(1,1) + L(5,8) + H(8) + V(3) + Z()
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d, height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
@@ -609,7 +609,7 @@ sz <- function(...) {
 #' d_big_ccw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE)
 #' d_big_cw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE, cw = TRUE)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(c(d_small_ccw, d_small_cw, d_big_ccw, d_big_cw),
 #'     height = 100, width = 100,
 #'     stroke = c("black", "grey", "blue", "cyan"),

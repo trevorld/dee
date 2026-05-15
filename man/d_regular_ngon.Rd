@@ -48,14 +48,14 @@ Its vectorized in its \code{x}, \code{y}, \code{r}, \code{n}, \code{a}, and \cod
 # A pentagon
 d5 <- d_regular_ngon(x = 5, y = 5, r = 4, n = 5)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d5, height = 10, width = 10,
        fill = "magenta", stroke = "black", stroke_width = 4)
 }
 # A hexagon
 d6 <- d_regular_ngon(x = 5, y = 5, r = 4, n = 6, offset = c(0, -1))
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d6, height = 10, width = 10,
        attrs = list(fill_rule = "evenodd"),
        fill = "magenta", stroke = "black", stroke_width = 4)

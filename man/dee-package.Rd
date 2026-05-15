@@ -3,9 +3,9 @@
 \docType{package}
 \name{dee-package}
 \alias{dee-package}
-\title{dee: 'd' Attribute Tools}
+\title{dee: Tools to Construct SVG Path 'd' Attributes}
 \description{
-Utilities to build an svg path 'd' \url{https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d} attribute.
+Provides helper functions to construct the SVG path 'd' \url{https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/d} attribute string. Supports all standard SVG path commands including 'moveto', 'lineto', 'closepath', quadratic and cubic Bézier curves, and elliptical arc curves. Also provides convenience wrappers for common shapes such as arcs, circles, ellipses, polygons, slashes, and stars. Coordinates may be supplied as numeric vectors or as 'affiner' coordinate objects and an option is available to automatically round them to a target number of decimal places for more compact svg strings. An option is also available to use a bottom-left origin (as is conventional in R graphics) rather than the top-left origin used by SVG.
 }
 \section{Package options}{
 
