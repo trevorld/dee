@@ -61,25 +61,25 @@ and \code{w} arguments.
 \examples{
 d_h <- d_fslash(2, 8, 8, 2, 1)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d_h, height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
 }
 d_s <- d_bslash(2, 8, 8, 2, 1, nib = "square")
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d_s, height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
 }
 d_v <- d_fslash(2, 8, 8, 2, 1, nib = "vertical")
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d_v, height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
 }
 d_d <- d_bslash(2, 8, 8, 2, 1, nib = "diagonal")
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d_d, height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
 }

@@ -87,14 +87,14 @@ Its vectorized in its \code{x}, \code{y}, \code{r}, \code{n}, \code{a}, \code{s}
 # A |5/2| star e.g. the *verda stelo* (using `d` shortcut)
 d <- d_isotoxal_2ngon(x = 5, y = 5, r = 3, n = 5, d = 2)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d, height = 10, width = 10,
        fill = "green", stroke = "none")
 }
 # "lozenge" shape most often has acute angles of 45 degrees (using `alpha`)
 d <- d_isotoxal_2ngon(x = 5, y = 5, r = 4, n = 2, alpha = 45)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d, height = 10, width = 10,
        fill = "cyan", stroke = "black", stroke_width = 4)
 }
@@ -102,7 +102,7 @@ if (requireNamespace("omsvg", quietly = TRUE) &&
 # Inner exterior angle of |8/3| star is 90 degrees (using `beta_ext`)
 d <- d_star(x = 5, y = 5, r = 4, n = 8, a = 22.5, beta_ext = 90)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d, height = 10, width = 10,
        fill = "yellow", stroke = "black", stroke_width = 4)
 }
@@ -111,7 +111,7 @@ if (requireNamespace("omsvg", quietly = TRUE) &&
 # creates a regular `n`-gon.
 d <- d_star(x = 5, y = 5, r = 4, n = 8, a = 22.5, beta_ext = 180)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d, height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
 }

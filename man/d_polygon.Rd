@@ -43,7 +43,7 @@ It's vectorized in its \code{offset} argument.
 l <- list(x = c(2, 5, 8, 5), y = c(5, 8, 5, 2))
 d <- d_polygon(l, offset = c(1, 0, -1))
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d, height = 10, width = 10,
        attrs = list(fill_rule = "evenodd"),
        fill = "red", stroke = "black", stroke_width = 4)

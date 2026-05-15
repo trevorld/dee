@@ -90,7 +90,7 @@ d_small_cw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, cw = TRUE)
 d_big_ccw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE)
 d_big_cw <- M(40, 70) + A(rx = 20, ry = 30, x = 20, y = 20, big = TRUE, cw = TRUE)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(c(d_small_ccw, d_small_cw, d_big_ccw, d_big_cw),
     height = 100, width = 100,
     stroke = c("black", "grey", "blue", "cyan"),

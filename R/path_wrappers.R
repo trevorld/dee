@@ -9,7 +9,7 @@
 #' @examples
 #' d_aabb(x = 2:6, y = 4:8)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d_aabb(x = 2:6, y = 4:8),
 #'        height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
@@ -47,7 +47,7 @@ d_aabb <- function(
 #' @examples
 #' d_rect(x = 5, y = 5, w = 4, h = 6)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d_rect(x = 5, y = 5, w = 4, h = 6),
 #'        height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
@@ -105,7 +105,7 @@ d_rect_helper <- function(x, y, w, h, a, ...) {
 #' d_circle(x = 5, y = 5, r = 2)
 #' d_ellipse(x = 5, y = 5, rx = 2, ry = 3)
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d_ellipse(x = 5, y = 5, rx = 2, ry = 3),
 #'        height = 10, width = 10,
 #'        fill = "red", stroke = "black", stroke_width = 4)
@@ -167,7 +167,7 @@ d_ellipse_helper <- function(x, y, rx, ry, a, ...) {
 #' l <- list(x = c(2, 5, 8, 5), y = c(5, 8, 5, 2))
 #' d <- d_polygon(l, offset = c(1, 0, -1))
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d, height = 10, width = 10,
 #'        attrs = list(fill_rule = "evenodd"),
 #'        fill = "red", stroke = "black", stroke_width = 4)

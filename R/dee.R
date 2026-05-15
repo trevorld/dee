@@ -128,9 +128,9 @@ as_omsvg <- function(
 
 #' Plot an object of class "dee"
 #'
-#' `plot()` an object of class "dee" using [omsvg::SVG()], [omsvg::svg_path()], and `svgparser::read_svg()`.
+#' `plot()` an object of class "dee" using [omsvg::SVG()], [omsvg::svg_path()], and `nanosvgr::nsvg_read()`.
 #'
-#' This function requires the package `svgparser` which (as of January 2026) is not available on CRAN.  You can install it with `remotes::install_github('coolbutuseless/svgparser')` or `utils::install.packages('svgparser', repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org'))`.
+#' This function requires the package `nanosvgr` which (as of May 2026) is not available on CRAN.  You can install it with `remotes::install_github('coolbutuseless/nanosvgr')` or `utils::install.packages('nanosvgr', repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org'))`.
 #'
 #' @inheritParams as_omsvg
 #' @return `invisible(NULL)`
@@ -143,7 +143,7 @@ as_omsvg <- function(
 #'      Q(10, 60, 10, 30) +
 #'      Z()
 #' if (requireNamespace("omsvg", quietly = TRUE) &&
-#'     requireNamespace("svgparser", quietly = TRUE)) {
+#'     requireNamespace("nanosvgr", quietly = TRUE)) {
 #'   plot(d, height = 100, width = 100, background_color = "cyan",
 #'        fill = "red", stroke = "black", stroke_width = 4)
 #' }
@@ -159,9 +159,9 @@ plot.dee <- function(
 	fill = getOption("dee.fill"),
 	attrs = getOption("dee.attrs")
 ) {
-	rlang::check_installed("svgparser", action = function(...) {
+	rlang::check_installed("nanosvgr", action = function(...) {
 		utils::install.packages(
-			'svgparser',
+			'nanosvgr',
 			repos = c('https://trevorld.r-universe.dev', 'https://cloud.r-project.org')
 		)
 	})
@@ -176,9 +176,11 @@ plot.dee <- function(
 		fill = fill,
 		attrs = attrs
 	)
-	g <- as.character(svg) |>
-		paste(collapse = "\n") |>
-		svgparser::read_svg()
+	f <- tempfile(fileext = ".svg")
+	on.exit(unlink(f))
+	writeLines(as.character(svg), f)
+	g <- nanosvgr::nsvg_read(f) |>
+		nanosvgr::nsvg_to_grob()
 	grid::grid.newpage()
 	grid::grid.draw(g)
 	invisible(NULL)

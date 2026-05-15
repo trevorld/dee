@@ -24,7 +24,7 @@ an axis-aligned bounding box path.
 \examples{
 d_aabb(x = 2:6, y = 4:8)
 if (requireNamespace("omsvg", quietly = TRUE) &&
-    requireNamespace("svgparser", quietly = TRUE)) {
+    requireNamespace("nanosvgr", quietly = TRUE)) {
   plot(d_aabb(x = 2:6, y = 4:8),
        height = 10, width = 10,
        fill = "red", stroke = "black", stroke_width = 4)
