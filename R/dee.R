@@ -179,10 +179,24 @@ plot.dee <- function(
 	f <- tempfile(fileext = ".svg")
 	on.exit(unlink(f))
 	writeLines(as.character(svg), f)
-	g <- nanosvgr::nsvg_read(f) |>
-		nanosvgr::nsvg_to_grob()
+	nsvg <- nanosvgr::nsvg_read(f)
+	max_y <- max(do.call(rbind, nsvg$points)$y)
+	g <- nanosvgr::nsvg_to_grob(nsvg)
+	for (i in seq_along(g$children)) {
+		child <- g$children[[i]]
+		child$x <- grid::unit(as.numeric(child$x) / width, "npc")
+		child$y <- grid::unit((as.numeric(child$y) + height - max_y) / height, "npc")
+		g$children[[i]] <- child
+	}
+	max_dim <- max(width, height)
+	vp <- grid::viewport(
+		width = grid::unit(width / max_dim, "snpc"),
+		height = grid::unit(height / max_dim, "snpc")
+	)
 	grid::grid.newpage()
+	grid::pushViewport(vp)
 	grid::grid.draw(g)
+	grid::popViewport()
 	invisible(NULL)
 }
 
